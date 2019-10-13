@@ -1,0 +1,57 @@
+.trollbox-container {
+  border: 2px solid grey;
+  margin-left: auto;
+  margin-right: auto;
+  height: 500px;
+  max-width: 500px;
+  overflow-y: scroll;
+}
+
+.content-input {
+  max-width: 550px;
+}
+
+.troll-form {
+  max-width: 550px;
+  margin: 15px auto;
+}
+
+.btn {
+  margin: 15px auto;
+}
+
+.troll-post--label {
+  text-align: left;
+}
+
+.li {
+  list-style: none;
+}
+
+p {
+  padding: 0px 10px;
+  margin-bottom: 0px;
+  font-size: 12px;
+  background-color: lightblue;
+  border-bottom: 1px solid grey;
+  // margin-right: 5px;
+}
+
+.error-message {
+  background-color: red;
+  text-transform: capitalize;
+  color: white;
+}
+
+.mad-troll-logo {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100vh;
+}
+
+.troll-feed {
+  text-align: center;
+}

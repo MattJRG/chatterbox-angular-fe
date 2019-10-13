@@ -1,0 +1,13 @@
+{
+  "name": "trollbox-v1-fe",
+  "version": 2,
+  "routes": [
+    { "src": "(.*\\..*)", "dest": "$1" },
+    { "src": ".*", "dest": "/index.html" }
+  ],
+  "builds": [
+    { "src": "package.json",
+      "use": "@now/static-build"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+<div *ngIf="!dead && !username">
+  <h3>Please enter your username:</h3>
+  <input type="text" name="trollname" id="trollname" class="form-control content-input" (input)="tempName = $event.target.value">
+  <button class="btn btn-primary" (click)="assignUsername()">Lemmee in!</button>
+</div>
+<div *ngIf="!dead && username">
+  <h3 class="troll-feed">Troll Feed</h3>
+  <div class="trollbox-container">
+    <p *ngFor="let post of posts">{{post.name}}: {{post.content}}</p>
+
+  </div>
+  <form [formGroup]="trollForm" class="troll-form">
+    <label ></label>
+    <label for="contentInput" class="troll-post--label">Post</label>
+    <input
+      autocomplete="null"
+      name="contentInput"
+      id="contentInput"
+      class="form-control content-input"
+      formControlName="content">
+    <small id="contentHelp" class="form-text text-muted">We welcome your troll posts, they're safe with us.</small>
+    <button class="btn btn-danger" (click)="onSubmit()">Post</button>
+    <!-- <button class="btn btn-danger" (click)="loadAllPosts()">Load Posts</button> -->
+
+  </form>
+  <p class="error-message" *ngIf="error">{{error}}</p>
+</div>
+<div *ngIf="dead">
+  <img class="mad-troll-logo" width="600" alt="Troll Logo" src="https://www.fourjay.org/myphoto/f/48/484498_angry-troll-face-png.jpg">
+</div>
