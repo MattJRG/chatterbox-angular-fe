@@ -21,6 +21,20 @@ dead = false;
 posts = [];
 post: any;
 sub: any;
+rhymeArray = [
+  {
+  id: 1,
+  list: ['pipe', 'blype', 'clype', 'cripe', 'd-type', 'flipe', 'flype', 'gipe', 'gripe', 'grype', 'heiap', 'hype', 'knipe', 'lipe', 'p-type', 'quipe', 'r.i.p', 'ripe', 'shipe', 'sipe', 'skype', 'slipe', 'slype', 'snipe', 'stipe', 'stripe', 'stype', 'swipe', 'syp', 'tripe', 'type', 'wipe']
+  },
+  {
+    id: 2,
+    list: ['head', 'bled', 'bread', 'bred', 'chsld', 'cread', 'dead', 'dread', 'dred', 'dredd', 'ed', 'fed', 'fleadh', 'fled', 'fread', 'fred', 'freda', 'ged', 'head', 'jed', 'lead', 'led', 'lvedp', 'med', 'ned', 'nedd', 'pled', 'read', 'reade', 'red', 'redd', 'redde', 'said', 'shead', 'shed', 'shedd', 'shred', 'sled', 'sledd', 'spead', 'sped', 'spread', 'stead', 'ted', 'thread', 'tread', 'wed', 'wedd', 'zed']
+  },
+  {
+    id: 3,
+    list: ['round', 'bound', 'browned', 'clowned', 'crowned', 'downed', 'drowned', 'found', 'frowned', 'gowned', 'ground', 'hound', 'mound', 'pound', 'stound', 'wound']
+  }
+]
 
   constructor(private http: HttpClient) { }
 
