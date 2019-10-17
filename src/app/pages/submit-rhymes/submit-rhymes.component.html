@@ -1,0 +1,8 @@
+<h3>Please enter your rhyming words:</h3>
+<small id="contentHelp" class="form-text text-muted">You can add more than one word at once using commas ","</small>
+<input type="text" name="rhymeInput" id="rhymeInput" class="form-control content-input" (input)="word = $event.target.value">
+<br>
+<button class="btn btn-primary" (click)="addWords()">Add words!</button>
+<p *ngFor="let word of words">{{ word }}</p>
+<button *ngIf="words.length > 0" class="btn btn-primary" (click)="onSubmit()">Push to database</button>
+

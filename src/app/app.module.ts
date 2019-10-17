@@ -7,13 +7,15 @@ import { WelcomePageComponent } from './pages/welcome-page/welcome-page.componen
 import { TrollPageComponent } from './pages/troll-page/troll-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SubmitRhymesComponent } from './pages/submit-rhymes/submit-rhymes.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomePageComponent,
-    TrollPageComponent
+    TrollPageComponent,
+    SubmitRhymesComponent
   ],
   imports: [
     BrowserModule,
