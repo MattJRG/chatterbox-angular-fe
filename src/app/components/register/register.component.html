@@ -1,0 +1,13 @@
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+  <h3>Please enter your username:</h3>
+  <br>
+  <label for="name">Desired Alias</label>
+  <input type="text" id="name" formControlName="name" class="form-control content-input" (input)="tempName = $event.target.value">
+  <label for="password">Password</label>
+  <input type="password" id="password" formControlName="password" class="form-control content-input" (input)="tempName = $event.target.value">
+  <label for="shoeSize">Shoe Size</label>
+  <input type="shoeSize" id="shoeSize" formControlName="shoeSize" class="form-control content-input" (input)="tempName = $event.target.value">
+  <br>
+  <button class="btn btn-inline btn-primary" type="submit">Sign me UP!!</button>
+  <button class="btn btn-secondary" (click)="openLogin()">Login</button>
+</form>

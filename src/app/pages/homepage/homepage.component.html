@@ -7,12 +7,6 @@
         </h1>
         <img class="troll-logo" width="300" alt="Troll Logo" src="https://s14415.pcdn.co/wp-content/resize/uploads/brandwatch/troll.jpg__w469">
       </div>
-      <app-login
-        *ngIf="state === 'login'"
-        (stateChange)="changeState($event)"></app-login>
-      <app-register
-        *ngIf="state === 'register'"
-        (stateChange)="changeState($event)"></app-register>
     </div>
   </div>
 </div>

@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-
+import { ConnectorSerivce } from './../../services/connector.service';
 
 @Component({
   selector: 'app-troll-page',
@@ -10,59 +9,54 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TrollPageComponent implements OnInit {
 
-//  @Input() username: string
 tempName: string
 username: string
 trollForm: FormGroup;
-API_URL: string;
 error: any;
 errorCount: number = 0;
 dead = false;
 posts = [];
 post: any;
 sub: any;
+feedOpen: boolean = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private connectorService: ConnectorSerivce) { }
 
   ngOnInit() {
-    if (window.location.hostname === 'localhost') {
-      this.API_URL = 'http://localhost:5000/trolls';
-    } else {
-      this.API_URL = 'https://trollfeed-api.now.sh/trolls';
-    }
+    this.openFeed();
+    this.createTrollForm();
+
+    // this.API_URL =
+    this.loadAllPosts();
+    // this.loadPostsLoop();
+  }
+
+  createTrollForm() {
     this.trollForm = new FormGroup({
       'username': new FormControl(this.username),
       'content': new FormControl(null, Validators.required)
     });
-    this.loadAllPosts();
-    this.loadPostsLoop();
   }
 
-
-  sendPost(url: string, post: { username: string; content: string }){
-    fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(post),
-      headers: {
-        'content-type': 'application/json'
-      }
-    }).then(response => response.json()).then(createdPost => {
-      console.log(createdPost);
-    });
+  openFeed() {
+    this.feedOpen = true;
   }
 
-  assignUsername() {
-    this.username = this.tempName.toString();
+  backToLogin() {
+    this.feedOpen = false;
   }
 
   loadAllPosts() {
-    fetch(this.API_URL)
-      .then(response => response.json())
-      .then(posts => {
-        this.posts = [];
-        this.posts = posts
-        console.log(this.posts);
-      });
+    // fetch(this.API_URL)
+    //   .then(response => response.json())
+    //   .then(posts => {
+    //     this.posts = [];
+    //     this.posts = posts
+    //     console.log(this.posts);
+    //   });
+    this.connectorService.getTrollPosts().subscribe(response => {
+      this.posts = response.body;
+    })
   }
 
   loadPostsLoop() {
@@ -72,20 +66,33 @@ sub: any;
     }, 3000)
   }
 
+  onLogin() {
+    this.feedOpen = false;
+  }
+
   onSubmit() {
+    if (!this.username) {
+      this.error = 'Please login to post!';
+      return
+    }
     if (this.trollForm.valid){
       this.post = {
         username: this.username,
         content: this.trollForm.controls.content.value
       };
-
-      console.log(this.post);
-      this.sendPost(this.API_URL, this.post);
-      this.trollForm.controls.content.reset();
-      this.error = false;
-      setTimeout(() => {
-        this.loadAllPosts();
-      }, 1500)
+      this.connectorService.postTrollPost(this.post).subscribe(response => {
+        console.log(response);
+        this.trollForm.controls.content.reset();
+        this.error = false;
+        setTimeout(() => {
+          this.loadAllPosts();
+        }, 1500)
+      }, error => {
+        if (error.status === 403) {
+          this.error = 'Please login to post!';
+          console.log(error);
+        }
+      });
     } else {
       this.errorCount++
       if (this.errorCount <= 1) {
@@ -110,4 +117,27 @@ sub: any;
       }
     }
   }
+
+  // Old fetch methods
+  // sendPost(url: string, post: { username: string; content: string }){
+  //   fetch(url, {
+  //     method: 'POST',
+  //     body: JSON.stringify(post),
+  //     headers: {
+  //       'content-type': 'application/json'
+  //     }
+  //   }).then(response => response.json()).then(createdPost => {
+  //     console.log(createdPost);
+  //   });
+  // }
+
+  // loadAllPostsFetch() {
+  //   fetch(this.API_URL)
+  //     .then(response => response.json())
+  //     .then(posts => {
+  //       this.posts = [];
+  //       this.posts = posts
+  //       console.log(this.posts);
+  //     });
+  // }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConnectorSerivce } from './../../services/connector.service';
 
 @Component({
   selector: 'app-submit-rhymes',
@@ -6,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./submit-rhymes.component.scss']
 })
 export class SubmitRhymesComponent implements OnInit {
-  API_URL: string;
   word: string;
   words = [];
   rhymeArray2 = [
@@ -24,21 +24,20 @@ export class SubmitRhymesComponent implements OnInit {
     }
   ];
 
-  rhyme: any;
-
-  constructor() { }
+  constructor(private connectorService: ConnectorSerivce) { }
 
   ngOnInit() {
-    if (window.location.hostname === 'localhost') {
-      this.API_URL = 'http://localhost:5000/rhymes';
-    } else {
-      this.API_URL = 'https://trollfeed-api.now.sh/rhymes';
-    }
     console.log(this.words.length)
   }
 
   addWords() {
     this.words = this.word.toString().replace(/[^a-zA-Z,\\s$]/g, '').replace(/[^a-zA-Z\\s$]/g, ' ').split(' ');
+  }
+
+  submitRhymes(rhymesData) {
+    this.connectorService.postRhymes(rhymesData).subscribe(response => {
+      console.log('response')
+    })
   }
 
   sendRhyme(url: string, rhyme: { content: Array<string> }) {
@@ -54,13 +53,12 @@ export class SubmitRhymesComponent implements OnInit {
   }
 
   onSubmit() {
-    this.rhyme = {
-      content: this.words
+    let rhyme = {
+      rhymes: this.words
     };
-    console.log(this.rhyme);
-    this.sendRhyme(this.API_URL, this.rhyme);
+    console.log(rhyme);
+    this.submitRhymes(rhyme);
     this.word = '';
     this.words = [];
-    this.rhyme = {};
   }
 }
