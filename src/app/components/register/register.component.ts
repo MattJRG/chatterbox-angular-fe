@@ -21,7 +21,8 @@ export class RegisterComponent implements OnInit{
 
   createRegistrationForm() {
     this.registrationForm = new FormGroup({
-    'name': new FormControl('', Validators.required),
+    'username': new FormControl('', Validators.required),
+    'email': new FormControl('', [Validators.required, Validators.email]),
     'password': new FormControl('', Validators.required),
     'shoeSize': new FormControl('', Validators.required)
     });
@@ -37,15 +38,15 @@ export class RegisterComponent implements OnInit{
 
   register() {
     let credentials = {
-      name: this.registrationForm.controls.name.value,
-      pass: this.registrationForm.controls.password.value,
+      username: this.registrationForm.controls.username.value,
+      email: this.registrationForm.controls.email.value,
+      password: this.registrationForm.controls.password.value,
       shoeSize: this.registrationForm.controls.shoeSize.value
     }
     console.log(credentials);
     this.connectorService.register(credentials).subscribe((response) => {
       if (response.status === 200) {
       console.log('Registration successful!');
-      // this.username = credentials.name;
       console.log(response)
       }
     }, error => {

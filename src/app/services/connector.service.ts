@@ -58,4 +58,11 @@ export class ConnectorSerivce {
     return this.apiService.post(`${this.API_URL}/trolls/register`, postData);
   }
 
+  forgot = (postData): Observable<any> => {
+    return this.apiService.post(`${this.API_URL}/trolls/forgot`, postData);
+  }
+
+  reset = (postData): Observable<any> => {
+    return this.apiService.post(`${this.API_URL}/trolls/reset`, postData);
+  }
 }

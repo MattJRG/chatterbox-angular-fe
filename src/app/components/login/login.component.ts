@@ -23,7 +23,7 @@ ngOnInit() {
 
   createLoginForm() {
     this.loginForm = new FormGroup({
-    'name': new FormControl('', Validators.required),
+    'username': new FormControl('', Validators.required),
     'password': new FormControl('', Validators.required)
     });
   }
@@ -36,17 +36,16 @@ ngOnInit() {
 
   login() {
     let credentials ={
-      name: this.loginForm.controls.name.value,
-      pass: this.loginForm.controls.password.value
+      username: this.loginForm.controls.username.value,
+      password: this.loginForm.controls.password.value
     }
     console.log(credentials);
     this.connectorService.trollLogin(credentials).subscribe((response) => {
       if (response.status === 200) {
       console.log('Login successful!');
-      this.username = credentials.name;
+      this.username = credentials.username;
       console.log(response)
       localStorage.setItem('authToken', response.body.token);
-      // this.openFeed();
       }
     }, error => {
       console.log('Login details incorrect!');

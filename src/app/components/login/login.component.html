@@ -1,10 +1,10 @@
 <form [formGroup]="loginForm" (ngSubmit)="onloginSubmit()">
   <h3>Please enter your username:</h3>
   <br>
-  <label for="name">Username</label>
-  <input type="text" id="name" formControlName="name" class="form-control content-input" (input)="tempName = $event.target.value">
+  <label for="username">Username</label>
+  <input type="text" id="username" formControlName="username" class="form-control content-input">
   <label for="password">Password</label>
-  <input type="password" id="password" formControlName="password" class="form-control content-input" (input)="tempName = $event.target.value">
+  <input type="password" id="password" formControlName="password" class="form-control content-input">
   <br>
   <button class="btn btn-inline btn-primary" type="submit">Lemmee in!</button>
   <button class="btn btn-secondary" (click)="openRegister()">Register?</button>
