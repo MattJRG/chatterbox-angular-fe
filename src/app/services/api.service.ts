@@ -7,27 +7,45 @@ import { Observable, throwError } from 'rxjs';
 })
 export class ApiService {
 
+  noAuthHeader = { 'NoAuth': 'True' };
+
     constructor(private http: HttpClient) {
     }
 
-    public get(path: string): Observable<Object> {
-      let headers = new HttpHeaders({
+    public get(path: string, noAuth?): Observable<Object> {
+      let headers = new HttpHeaders({ });
+      if (noAuth) {
+        headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'NoAuth': 'True'
+        });
+      } else {
+        headers = new HttpHeaders({
           'Content-Type': 'application/json'
-      });
+        });
+      }
 
       return this.http.get(path, { headers: headers, observe: 'response' })
     }
 
-    public post(path: string, body: any): Observable<Object> {
-      let headers = new HttpHeaders({
+    public post(path: string, body: any, noAuth?): Observable<Object> {
+      let headers = new HttpHeaders({ });
+      if (noAuth) {
+        console.log('Using noAuth');
+        headers = new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-      });
+          'NoAuth': 'True'
+        });
+      } else {
+        headers = new HttpHeaders({
+          'Content-Type': 'application/json'
+        });
+      }
 
       return this.http.post(path, body, { headers: headers, observe: 'response' })
     }
 
-    public put(path: string, body: any): Observable<Object> {
+    public put(path: string, body: any, noAuth?): Observable<Object> {
       let headers = new HttpHeaders({
           'Content-Type': 'application/json'
       });
@@ -35,7 +53,7 @@ export class ApiService {
       return this.http.put(path, body, { headers: headers, observe: 'response' })
     }
 
-    public delete(path: string): Observable<Object> {
+    public delete(path: string, noAuth?): Observable<Object> {
       let headers = new HttpHeaders({
           'Content-Type': 'application/json'
       });
@@ -43,7 +61,7 @@ export class ApiService {
       return this.http.delete(path, { headers: headers, observe: 'response' })
     }
 
-    public upload(path: string, files: File[], extraParams: { [key: string]: string }): Observable<Object> {
+    public upload(path: string, files: File[], extraParams: { [key: string]: string }, customHeaders?): Observable<Object> {
       const formData: FormData = new FormData();
       let headers = new HttpHeaders({});
 

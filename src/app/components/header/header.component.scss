@@ -1,22 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import '../../../sass/base/variables';
 
 .header {
-  background-color: white;
+  background-color: $dark;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  padding: 20px 2rem;
+  color: $white;
 }
 
 ul {
   margin: 0;
 }
 
-li, a, button {
+li, a {
   font-family: "Monserrat", sans-serif;
   font-weight: 500;
   font-size: 16px;
-  color: #000000;
+  color: $white;
   text-decoration: none;
 }
 
@@ -48,7 +50,6 @@ li, a, button {
   background-repeat: no-repeat;
 }
 
-
 .nav__links {
   list-style: none;
 }
@@ -65,18 +66,3 @@ li, a, button {
 .nav__links li a:hover {
   color: #007BFF;
 }
-
-button {
-  padding: 9px 25px;
-  background-color: rgba(0,123,255,1);
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease 0s;
-}
-
-button:hover {
-  background-color: rgba(0,123,255,0.8);
-}
-
-

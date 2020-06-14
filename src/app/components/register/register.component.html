@@ -1,15 +1,14 @@
 <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-  <h3>Please enter your username:</h3>
+  <h3>Please fill in your details below:</h3>
   <br>
-  <label for="username">Desired Alias</label>
-  <input type="text" id="username" formControlName="username" class="form-control content-input">
-  <label for="email">Email</label>
-  <input type="text" id="email" formControlName="email" class="form-control content-input">
-  <label for="password">Password</label>
-  <input type="password" id="password" formControlName="password" class="form-control content-input">
-  <label for="shoeSize">Shoe Size</label>
-  <input type="shoeSize" id="shoeSize" formControlName="shoeSize" class="form-control content-input">
+  <input type="text" id="username" formControlName="username" class="form-control content-input" placeholder="Alias">
   <br>
-  <button class="btn btn-inline btn-primary" type="submit">Sign me UP!!</button>
-  <button class="btn btn-secondary" (click)="openLogin()">Login</button>
+  <input type="text" id="email" formControlName="email" class="form-control content-input" placeholder="Email">
+  <br>
+  <input type="password" id="password" formControlName="password" class="form-control content-input" placeholder="Password">
+  <br>
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-inline btn-primary" type="submit">Sign up!!</button>
+    <button class="btn btn-secondary" (click)="openLogin()">Login</button>
+</div>
 </form>

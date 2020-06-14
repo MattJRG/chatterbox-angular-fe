@@ -1,13 +1,17 @@
-<form [formGroup]="loginForm" (ngSubmit)="onloginSubmit()">
+<form [formGroup]="loginForm" (ngSubmit)="onloginSubmit()" autocomplete="off">
   <h3>Please enter your username:</h3>
   <br>
-  <label for="username">Username</label>
-  <input type="text" id="username" formControlName="username" class="form-control content-input">
-  <label for="password">Password</label>
-  <input type="password" id="password" formControlName="password" class="form-control content-input">
+  <input type="text" id="email" formControlName="email" class="form-control content-input" placeholder="Email Address">
   <br>
-  <button class="btn btn-inline btn-primary" type="submit">Lemmee in!</button>
-  <button class="btn btn-secondary" (click)="openRegister()">Register?</button>
+  <input type="password" id="password" formControlName="password" class="form-control content-input" placeholder="Password">
+  <br>
+ <div class="d-flex justify-content-between">
+    <div>
+      <button class="btn btn-inline btn-primary" type="submit">Login</button>
+      <button class="btn btn-secondary" type="button" (click)="openRegister()">Register</button>
+    </div>
+    <button class="btn btn-danger" type="button" (click)="forgotPassword()">Forgot password</button>
+ </div>
   <br>
   <br>
   <!-- <button class="btn btn-secondary" routerLink="/home">Later m8!</button> -->

@@ -1,6 +1,6 @@
 // Imports
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -28,6 +28,11 @@ import { LoginComponent } from './components/login/login.component';
 
 // Directives
 import { HoverClassDirective } from './directives/hover-class.directive';
+
+
+// Interceptors
+import { AuthInterceptor } from './auth/auth.interceptor';
+
 
 // *** End of Declarations *** //
 
@@ -62,6 +67,11 @@ import { ConnectorSerivce } from './services/connector.service';
     HttpClientModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     ApiService,
     ConnectorSerivce
   ],

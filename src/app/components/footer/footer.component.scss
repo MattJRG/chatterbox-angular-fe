@@ -1,6 +1,11 @@
+@import '../../../sass/base/variables';
+
 .footer {
-  min-height: 140px;
+  min-height: 120px;
   bottom: 0;
   position: absolute;
   width: 100%;
+  background: $dark;
+  color: $white;
+  padding: 2rem;
 }

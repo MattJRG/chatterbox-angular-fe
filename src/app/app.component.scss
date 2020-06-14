@@ -1,0 +1,9 @@
+@import '../sass/base/variables';
+
+.site-container {
+  height: calc(100vh - 210px);
+}
+
+.content-container {
+  background: $off-white;
+}

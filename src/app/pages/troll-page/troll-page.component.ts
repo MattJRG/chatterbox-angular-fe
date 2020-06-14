@@ -9,53 +9,33 @@ import { ConnectorSerivce } from './../../services/connector.service';
 })
 export class TrollPageComponent implements OnInit {
 
-tempName: string
-username: string
 trollForm: FormGroup;
 error: any;
 errorCount: number = 0;
 dead = false;
 posts = [];
-post: any;
-sub: any;
-feedOpen: boolean = false;
+scrolled: boolean = false;
 
   constructor(private connectorService: ConnectorSerivce) { }
 
   ngOnInit() {
-    this.openFeed();
     this.createTrollForm();
-
-    // this.API_URL =
     this.loadAllPosts();
-    // this.loadPostsLoop();
   }
 
   createTrollForm() {
     this.trollForm = new FormGroup({
-      'username': new FormControl(this.username),
       'content': new FormControl(null, Validators.required)
     });
   }
 
-  openFeed() {
-    this.feedOpen = true;
-  }
-
-  backToLogin() {
-    this.feedOpen = false;
-  }
-
   loadAllPosts() {
-    // fetch(this.API_URL)
-    //   .then(response => response.json())
-    //   .then(posts => {
-    //     this.posts = [];
-    //     this.posts = posts
-    //     console.log(this.posts);
-    //   });
     this.connectorService.getTrollPosts().subscribe(response => {
+      console.log(response.body)
       this.posts = response.body;
+      setTimeout(() => {
+        this.updateScroll();
+      }, 1000)
     })
   }
 
@@ -66,21 +46,19 @@ feedOpen: boolean = false;
     }, 3000)
   }
 
-  onLogin() {
-    this.feedOpen = false;
+  updateScroll() {
+    if (!this.scrolled) {
+      var element = document.getElementById("trollbox-container");
+      element.scrollTop = element.scrollHeight - 50;
+    }
   }
 
   onSubmit() {
-    if (!this.username) {
-      this.error = 'Please login to post!';
-      return
-    }
     if (this.trollForm.valid){
-      this.post = {
-        username: this.username,
+      let newPost = {
         content: this.trollForm.controls.content.value
       };
-      this.connectorService.postTrollPost(this.post).subscribe(response => {
+      this.connectorService.postTrollPost(newPost).subscribe(response => {
         console.log(response);
         this.trollForm.controls.content.reset();
         this.error = false;
@@ -117,27 +95,4 @@ feedOpen: boolean = false;
       }
     }
   }
-
-  // Old fetch methods
-  // sendPost(url: string, post: { username: string; content: string }){
-  //   fetch(url, {
-  //     method: 'POST',
-  //     body: JSON.stringify(post),
-  //     headers: {
-  //       'content-type': 'application/json'
-  //     }
-  //   }).then(response => response.json()).then(createdPost => {
-  //     console.log(createdPost);
-  //   });
-  // }
-
-  // loadAllPostsFetch() {
-  //   fetch(this.API_URL)
-  //     .then(response => response.json())
-  //     .then(posts => {
-  //       this.posts = [];
-  //       this.posts = posts
-  //       console.log(this.posts);
-  //     });
-  // }
 }

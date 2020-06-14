@@ -1,6 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ConnectorSerivce } from './../../services/connector.service';
+import { UserService } from './../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,11 +13,13 @@ import { ConnectorSerivce } from './../../services/connector.service';
 export class LoginComponent implements OnInit {
 
 loginForm: FormGroup;
-username: string;
 
 @Output() stateChange = new EventEmitter();
 
-constructor(private connectorService: ConnectorSerivce) {}
+constructor(
+  private connectorService: ConnectorSerivce,
+  private userService: UserService,
+  private router: Router) {}
 
 ngOnInit() {
   this.createLoginForm();
@@ -23,7 +27,7 @@ ngOnInit() {
 
   createLoginForm() {
     this.loginForm = new FormGroup({
-    'username': new FormControl('', Validators.required),
+    'email': new FormControl('', Validators.required),
     'password': new FormControl('', Validators.required)
     });
   }
@@ -35,21 +39,25 @@ ngOnInit() {
   }
 
   login() {
-    let credentials ={
-      username: this.loginForm.controls.username.value,
+    let credentials = {
+      email: this.loginForm.controls.email.value,
       password: this.loginForm.controls.password.value
     }
-    console.log(credentials);
-    this.connectorService.trollLogin(credentials).subscribe((response) => {
+    this.connectorService.login(credentials).subscribe((response) => {
       if (response.status === 200) {
-      console.log('Login successful!');
-      this.username = credentials.username;
-      console.log(response)
-      localStorage.setItem('authToken', response.body.token);
+        localStorage.removeItem("token");
+        localStorage.setItem('user', response.body.username);
+        this.userService.setToken(response.body.token);
+        this.router.navigateByUrl('/trollbox')
       }
     }, error => {
       console.log('Login details incorrect!');
     })
+  }
+
+  // Todo!
+  forgotPassword() {
+    console.log("User has forgotten password")
   }
 
   openRegister() {

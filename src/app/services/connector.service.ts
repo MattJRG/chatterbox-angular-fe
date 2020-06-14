@@ -8,10 +8,12 @@ export class ConnectorSerivce {
 
 
   API_URL: string;
+  API_Login_URL: string;
 
   constructor(private apiService: ApiService){
     if (window.location.hostname === 'localhost') {
       this.API_URL = 'http://localhost:5000';
+      this.API_URL= 'http://localhost:3000';
       // this.API_URL = 'http://localhost:4000';
     } else {
       this.API_URL = 'https://trollfeed-api.now.sh';
@@ -45,24 +47,27 @@ export class ConnectorSerivce {
     return this.apiService.get(`${this.API_URL}/trolls`);
   }
 
-  trollLogin = (credentials): Observable<any> => {
-    return this.apiService.post(`${this.API_URL}/trolls/login`, credentials);
-  }
-
   postTrollPost = (postData): Observable<any> => {
     return this.apiService.post(`${this.API_URL}/trolls`, postData);
   }
 
-  // Register
+  login = (credentials): Observable<any> => {
+    return this.apiService.post(`${this.API_URL}/api/authenticate`, credentials, true);
+  }
+
   register = (postData): Observable<any> => {
-    return this.apiService.post(`${this.API_URL}/trolls/register`, postData);
+    return this.apiService.post(`${this.API_URL}/api/register`, postData, true);
+  }
+
+  logout = (): Observable<any> => {
+    return this.apiService.post(`${this.API_URL}/api/logout`, {})
   }
 
   forgot = (postData): Observable<any> => {
-    return this.apiService.post(`${this.API_URL}/trolls/forgot`, postData);
+    return this.apiService.post(`${this.API_URL}/auth/forgot`, postData);
   }
 
   reset = (postData): Observable<any> => {
-    return this.apiService.post(`${this.API_URL}/trolls/reset`, postData);
+    return this.apiService.post(`${this.API_URL}/auth/reset`, postData);
   }
 }

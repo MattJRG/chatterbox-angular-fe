@@ -1,12 +1,9 @@
 <div class="container">
-  <div class="row">
-    <div class="col-sm">
-      <div style="text-align:center">
-        <h1>
-          Welcome to the trollbox!
-        </h1>
-        <img class="troll-logo" width="300" alt="Troll Logo" src="https://s14415.pcdn.co/wp-content/resize/uploads/brandwatch/troll.jpg__w469">
-      </div>
+  <div class="welcome-container">
+    <div class=col>
+      <h1>Chatterbox</h1>
+      <br>
+      <br>
       <app-login
         *ngIf="state === 'login'"
         (stateChange)="changeState($event)"></app-login>
