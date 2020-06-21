@@ -2,12 +2,19 @@
 @import '../../../sass/base/variables';
 
 .header {
+  position: fixed;
   background-color: $dark;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 2rem;
   color: $white;
+  top: 0;
+  width: 100%;
+
+  @media (max-width: $screen-xs) {
+    padding: 10px 1rem 10px 0;
+  }
 }
 
 ul {
@@ -35,7 +42,7 @@ li, a {
 .logo {
   width: 90px;
   height: 50px;
-  background-image: url('../../../assets/images/trollface-logo.png');
+  background-image: url('../../../assets/images/trollface-logo--white.png');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -44,7 +51,7 @@ li, a {
 .logo-alt {
   width: 90px;
   height: 50px;
-  background-image: url('../../../assets/images/trollface-logo-alt.png');
+  background-image: url('../../../assets/images/trollface-logo-alt--white.png');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;

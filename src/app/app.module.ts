@@ -4,6 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { PickerModule } from '@ctrl/ngx-emoji-mart'
 
 // *** */ Declarations *** //
 
@@ -64,7 +65,8 @@ import { ConnectorSerivce } from './services/connector.service';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    PickerModule
   ],
   providers: [
     {

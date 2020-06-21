@@ -1,9 +1,11 @@
 @import '../sass/base/variables';
 
-.site-container {
-  height: calc(100vh - 210px);
-}
-
 .content-container {
+  height: auto;
   background: $off-white;
+  margin-top: 90px;
+
+  @media (max-width: $screen-xs) {
+    margin-top: 70px;
+  }
 }

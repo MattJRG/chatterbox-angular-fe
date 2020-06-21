@@ -1,13 +1,13 @@
 <div class="header">
   <div class="header__left">
+    <a class="desktop-only" routerLink="/home"><h1>Chatterbox</h1></a>
     <a routerLink="/home">
       <div class="logo" hover-class="logo-alt">
       </div>
     </a>
-    <p><--Insert logo here</p>
   </div>
 
-  <div class="header__nav">
+  <div *ngIf="userService.isLoggedIn()" class="header__nav desktop-and-tablet-only">
     <nav>
       <ul class="nav__links">
         <li><a routerLink="./trollbox">Trollbox</a></li>
@@ -17,7 +17,7 @@
     </nav>
   </div>
 
-  <div class="header__right">
-    <a class="cta"><button class="btn btn-primary btn-inline" (click)="logout()">Log out</button></a>
+  <div *ngIf="userService.isLoggedIn()" class="header__right">
+    <a class="cta"><button class="btn btn-primary" (click)="logout()">Log out</button></a>
   </div>
 </div>

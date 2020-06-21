@@ -11,6 +11,7 @@ import { ConnectorSerivce } from './../../services/connector.service';
 export class RegisterComponent implements OnInit{
 
   registrationForm: FormGroup;
+  error: string;
   @Output() stateChange = new EventEmitter();
 
   constructor(private connectorService: ConnectorSerivce) {}
@@ -31,7 +32,7 @@ export class RegisterComponent implements OnInit{
     if (this.registrationForm.valid) {
       this.register();
     } else {
-      console.log('Please enter valid details');
+      this.error = 'Please enter valid details';
     }
   }
 
@@ -54,7 +55,7 @@ export class RegisterComponent implements OnInit{
   }
 
   openLogin() {
-    this.stateChange.emit('login');
+    this.stateChange.emit('Login');
   }
 
 }

@@ -10,6 +10,14 @@
   font-size: 8px;
 }
 
+.text--muted {
+  color: $muted;
+}
+
 .text--center {
   text-align: center;
+}
+
+.text--white {
+  color: $white;
 }

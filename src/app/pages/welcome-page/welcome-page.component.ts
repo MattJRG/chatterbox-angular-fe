@@ -19,7 +19,7 @@ export class WelcomePageComponent implements OnInit {
     if (this.loggedIn) {
       this.redirectToHomepage();
     } else {
-      this.state = 'login';
+      this.state = 'Login';
     }
   }
 

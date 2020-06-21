@@ -1,10 +1,8 @@
-<app-header *ngIf="userService.isLoggedIn()"></app-header>
-<div class="site-container">
+<app-header></app-header>
 
   <main class="content-container">
     <router-outlet></router-outlet>
   </main>
 
-</div>
-<app-footer *ngIf="userService.isLoggedIn()"></app-footer>
+<app-footer></app-footer>
 

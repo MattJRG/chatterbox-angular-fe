@@ -12,11 +12,11 @@ export class ConnectorSerivce {
 
   constructor(private apiService: ApiService){
     if (window.location.hostname === 'localhost') {
-      this.API_URL = 'http://localhost:5000';
+      // this.API_URL = 'http://localhost:5000';
       this.API_URL= 'http://localhost:3000';
-      // this.API_URL = 'http://localhost:4000';
+      // this.API_URL = 'https://chatterbox-virid.vercel.app'
     } else {
-      this.API_URL = 'https://trollfeed-api.now.sh';
+      this.API_URL = 'https://chatterbox.mattjrg.vercel.app';
     }
   }
 
@@ -43,8 +43,8 @@ export class ConnectorSerivce {
   }
 
   // Trolls
-  getTrollPosts = (): Observable<any> => {
-    return this.apiService.get(`${this.API_URL}/trolls`);
+  getTrollPosts = (query): Observable<any> => {
+    return this.apiService.get(`${this.API_URL}/trolls?${query}`);
   }
 
   postTrollPost = (postData): Observable<any> => {
@@ -63,11 +63,11 @@ export class ConnectorSerivce {
     return this.apiService.post(`${this.API_URL}/api/logout`, {})
   }
 
-  forgot = (postData): Observable<any> => {
-    return this.apiService.post(`${this.API_URL}/auth/forgot`, postData);
+  forgot = (email): Observable<any> => {
+    return this.apiService.get(`${this.API_URL}/api/forgot?email=${email}`, true);
   }
 
   reset = (postData): Observable<any> => {
-    return this.apiService.post(`${this.API_URL}/auth/reset`, postData);
+    return this.apiService.post(`${this.API_URL}/api/reset`, postData);
   }
 }

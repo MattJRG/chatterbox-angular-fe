@@ -21,9 +21,39 @@ body {
 }
 
 .content-container {
-  padding: 1rem 2rem;
+  padding: 0rem 2rem;
+
+  @media (max-width: $screen-xs) {
+    padding: 0 1rem;
+  }
+}
+
+.container-vh {
+  height: calc(100vh - 250px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .btn-inline {
   margin-right: 1rem;
+}
+
+.desktop-only {
+  @media (max-width: $screen-md) {
+    display: none;
+  }
+}
+
+.desktop-and-tablet-only {
+  @media (max-width: $screen-sm) {
+    display: none;
+  }
+}
+
+.not-small-mobile {
+  @media (max-width: $screen-xs) {
+    display: none;
+  }
 }

@@ -9,7 +9,7 @@ import { UserService } from './../../services/user.service';
 
 export class AppHeader {
 
-  constructor(private userService: UserService) {}
+  constructor(public userService: UserService) {}
 
   logout() {
     this.userService.logout();

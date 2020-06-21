@@ -57,11 +57,12 @@ ngOnInit() {
 
   // Todo!
   forgotPassword() {
-    console.log("User has forgotten password")
+    this.connectorService.forgot(this.loginForm.controls.email.value).subscribe((response) => {
+    })
   }
 
   openRegister() {
-    this.stateChange.emit('register')
+    this.stateChange.emit('Register')
   }
 
 }

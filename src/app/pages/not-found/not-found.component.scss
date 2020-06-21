@@ -1,0 +1,15 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: -20px auto 0;
+}
+
+.welcome-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  background-color: #222629;
+  color: white;
+}
