@@ -63,6 +63,10 @@ export class ConnectorSerivce {
     return this.apiService.post(`${this.API_URL}/api/logout`, {})
   }
 
+  verify = (token): Observable<any> => {
+    return this.apiService.get(`${this.API_URL}/api/verify?token=${token}`, true);
+  }
+
   forgot = (email): Observable<any> => {
     return this.apiService.get(`${this.API_URL}/api/forgot?email=${email}`, true);
   }

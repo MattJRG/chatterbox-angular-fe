@@ -1,0 +1,34 @@
+@import '../../../sass/base/variables';
+
+.spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  height: 88px;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 65px;
+  height: 65px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 52px;
+  height: 52px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid $dark;
+  border-color: $dark transparent $dark transparent;
+  animation: lds-dual-ring 1s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

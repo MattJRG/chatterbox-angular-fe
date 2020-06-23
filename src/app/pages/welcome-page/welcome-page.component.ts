@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-welcome-page',
@@ -9,10 +8,11 @@ import { Router } from '@angular/router';
 })
 export class WelcomePageComponent implements OnInit {
 
-  state: string
+  state: string;
   loggedIn: boolean = false;
+  vToken: string;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
     // If logged in send user to homepage
@@ -21,6 +21,11 @@ export class WelcomePageComponent implements OnInit {
     } else {
       this.state = 'Login';
     }
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.vToken = params['vToken'];
+      console.log(this.vToken);
+    })
   }
 
   changeState(value) {

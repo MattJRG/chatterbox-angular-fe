@@ -25,6 +25,8 @@ import { AppHeader } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { VerifyComponent } from './components/verify/verify.conponent';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 // Directives
@@ -57,6 +59,8 @@ import { ConnectorSerivce } from './services/connector.service';
     FooterComponent,
     RegisterComponent,
     LoginComponent,
+    VerifyComponent,
+    SpinnerComponent,
     // Directives
     HoverClassDirective
   ],

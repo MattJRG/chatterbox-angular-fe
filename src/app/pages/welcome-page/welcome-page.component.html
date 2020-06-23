@@ -1,5 +1,6 @@
 <div class="container-vh">
-  <div class="welcome-container">
+  <app-verify *ngIf="vToken" [vToken]="vToken"></app-verify>
+  <div *ngIf="!vToken" class="welcome-container">
     <div class=col>
       <h1>{{ state }}</h1>
       <br>
