@@ -16,7 +16,10 @@ export class ConnectorSerivce {
       this.API_URL= 'http://localhost:3000';
       // this.API_URL = 'https://chatterbox-virid.vercel.app'
     } else {
-      this.API_URL = 'https://chatterbox.mattjrg.vercel.app';
+      // Works but old
+      // this.API_URL = 'https://chatterbox.mattjrg.vercel.app';
+      // New test
+      this.API_URL = 'https://angular-chat-be.vercel.app';
     }
   }
 
