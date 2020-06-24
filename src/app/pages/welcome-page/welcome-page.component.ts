@@ -11,6 +11,7 @@ export class WelcomePageComponent implements OnInit {
   state: string;
   loggedIn: boolean = false;
   vToken: string;
+  rKey: string;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
@@ -24,7 +25,7 @@ export class WelcomePageComponent implements OnInit {
 
     this.activatedRoute.queryParams.subscribe(params => {
       this.vToken = params['vToken'];
-      console.log(this.vToken);
+      this.rKey = params['rKey'];
     })
   }
 

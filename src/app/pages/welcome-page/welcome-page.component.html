@@ -6,11 +6,17 @@
       <br>
       <br>
       <app-login
-        *ngIf="state === 'Login'"
-        (stateChange)="changeState($event)"></app-login>
+        *ngIf="state === 'Login' && !rKey"
+        (stateChange)="changeState($event)">
+      </app-login>
       <app-register
-        *ngIf="state === 'Register'"
-        (stateChange)="changeState($event)"></app-register>
+        *ngIf="state === 'Register' && !rKey"
+        (stateChange)="changeState($event)">
+      </app-register>
+      <app-reset-password
+        *ngIf="rKey"
+        [resetKey]="rKey">
+      </app-reset-password>
     </div>
   </div>
 </div>

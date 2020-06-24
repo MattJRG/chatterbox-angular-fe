@@ -72,6 +72,6 @@ export class ConnectorSerivce {
   }
 
   reset = (postData): Observable<any> => {
-    return this.apiService.post(`${this.API_URL}/api/reset`, postData);
+    return this.apiService.post(`${this.API_URL}/api/reset`, postData, true);
   }
 }

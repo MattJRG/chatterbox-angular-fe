@@ -27,6 +27,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { VerifyComponent } from './components/verify/verify.conponent';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 
 // Directives
@@ -61,6 +62,7 @@ import { ConnectorSerivce } from './services/connector.service';
     LoginComponent,
     VerifyComponent,
     SpinnerComponent,
+    ResetPasswordComponent,
     // Directives
     HoverClassDirective
   ],

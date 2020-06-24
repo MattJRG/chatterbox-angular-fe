@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
 loginForm: FormGroup;
+error: string;
 
 @Output() stateChange = new EventEmitter();
 
@@ -51,7 +52,9 @@ ngOnInit() {
         this.router.navigateByUrl('/trollbox')
       }
     }, error => {
-      console.log('Login details incorrect!');
+      if (error.status === 404) {
+        this.error = 'User does not exist'
+      }
     })
   }
 

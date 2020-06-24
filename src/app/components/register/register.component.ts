@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit{
     this.registrationForm = new FormGroup({
     'username': new FormControl('', Validators.required),
     'email': new FormControl('', [Validators.required, Validators.email]),
-    'password': new FormControl('', Validators.required)
+    'password': new FormControl('', [Validators.required, Validators.minLength(8)])
     });
   }
 
@@ -32,7 +32,13 @@ export class RegisterComponent implements OnInit{
     if (this.registrationForm.valid) {
       this.register();
     } else {
-      this.error = 'Please enter valid details';
+      if (!this.registrationForm.controls.username.valid) {
+        this.error = 'Please enter you desired alias';
+      } else if (!this.registrationForm.controls.email.valid) {
+        this.error = 'Please enter valid email address';
+      } else if (!this.registrationForm.controls.password.valid) {
+        this.error = 'Passwords must have at least 8 characters';
+      }
     }
   }
 
@@ -49,8 +55,10 @@ export class RegisterComponent implements OnInit{
       console.log(response)
       }
     }, error => {
-      console.log('Error with registration!');
-      console.log(error);
+      if (error.status === 400) {
+        this.error = error.error.message;
+        console.log(error);
+      }
     })
   }
 

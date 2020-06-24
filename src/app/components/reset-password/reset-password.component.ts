@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from "@angular/core";
+import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ConnectorSerivce } from '../../services/connector.service';
 import { ActivatedRoute } from '@angular/router';
@@ -11,10 +11,12 @@ import { ActivatedRoute } from '@angular/router';
 
 export class ResetPasswordComponent implements OnInit{
 
-  resetKey: string;
+  @Input() resetKey: string;
+  @Output() stateChange = new EventEmitter();
+
+  loading: boolean = false;
   error: string;
   resetPasswordForm: FormGroup;
-  @Output() stateChange = new EventEmitter();
 
   constructor(
     private connectorService: ConnectorSerivce,
@@ -22,9 +24,6 @@ export class ResetPasswordComponent implements OnInit{
   ) {}
 
   ngOnInit() {
-    // Check for the email reset key
-    this.resetKey = this.route.snapshot.params['rKey'];
-
     // If reset key not present display error
     if (!this.resetKey) {
       this.error = 'This route only works with reset email link';
@@ -43,31 +42,32 @@ export class ResetPasswordComponent implements OnInit{
   onSubmit() {
     if (this.resetPasswordForm.valid) {
       if (this.resetPasswordForm.controls.newPassword.value === this.resetPasswordForm.controls.confirmPassword.value)
-      this.register();
+      this.resetPassword();
     } else {
-      console.log('Please ensure passwords match');
+      this.error = 'Please ensure passwords match';
     }
   }
 
-  register() {
+  resetPassword() {
+    this.loading = true;
     let credentials = {
       newPassword: this.resetPasswordForm.controls.username.value,
       resetKey: this.resetKey
     }
     console.log(credentials);
-    this.connectorService.register(credentials).subscribe((response) => {
+    this.connectorService.reset(credentials).subscribe(response => {
       if (response.status === 200) {
-      console.log('Registration successful!');
-      console.log(response)
+      console.log('Password reset successful!');
+      console.log(response);
       }
     }, error => {
-      console.log('Error with registration!');
+      console.log('Error resetting password!');
       console.log(error);
     })
   }
 
   openLogin() {
-    this.stateChange.emit('login');
+    this.stateChange.emit('reset');
   }
 
 }
