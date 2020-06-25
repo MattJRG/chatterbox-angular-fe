@@ -1,23 +1,26 @@
 <div class="header">
-  <div class="header__left">
-    <a class="desktop-only" routerLink="/home"><h1>Chatterbox</h1></a>
-    <a routerLink="/home">
-      <div class="logo" hover-class="logo-alt">
-      </div>
-    </a>
-  </div>
+  <div class="container-1920">
+    <div class="header__left">
+      <a class="desktop-only" routerLink="/home"><h1>Chatterbox</h1></a>
+      <a routerLink="/home">
+        <div class="logo" hover-class="logo-alt">
+        </div>
+      </a>
+    </div>
 
-  <div *ngIf="userService.isLoggedIn()" class="header__nav desktop-and-tablet-only">
-    <nav>
-      <ul class="nav__links">
-        <li><a routerLink="./trollbox">Trollbox</a></li>
-        <li><a routerLink="./rhymes">Rhymer</a></li>
-        <li><a routerLink="./upload">Image uploader</a></li>
-      </ul>
-    </nav>
-  </div>
+    <div *ngIf="userService.isLoggedIn()" class="header__nav desktop-and-tablet-only">
+      <nav>
+        <ul class="nav__links">
+          <!-- Hidden for catch-up demo -->
+          <!-- <li><a routerLink="./trollbox">Trollbox</a></li>
+          <li><a routerLink="./rhymes">Rhymer</a></li>
+          <li><a routerLink="./upload">Image uploader</a></li> -->
+        </ul>
+      </nav>
+    </div>
 
-  <div *ngIf="userService.isLoggedIn()" class="header__right">
-    <a class="cta"><button class="btn btn-primary" (click)="logout()">Log out</button></a>
+    <div *ngIf="userService.isLoggedIn()" class="header__right">
+      <a class="cta"><button class="btn btn-primary" (click)="logout()">Log out</button></a>
+    </div>
   </div>
 </div>

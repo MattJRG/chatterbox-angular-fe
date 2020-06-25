@@ -1,3 +1,5 @@
+@import '../../../sass/base/variables';
+
 .welcome-container {
   display: flex;
   justify-content: center;
@@ -8,4 +10,9 @@
   margin-left: auto;
   margin-right: auto;
   width: 80%;
+
+  @media (max-width: $screen-xs) {
+    width: 100%;
+    margin: 0;
+  }
 }

@@ -53,7 +53,7 @@ ngOnInit() {
       }
     }, error => {
       if (error.status === 404) {
-        this.error = 'User does not exist'
+        this.error = error.error.message;
       }
     })
   }

@@ -34,6 +34,10 @@ body {
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
+
+  @media (max-width: $screen-xs) {
+    height: calc(100vh - 198px);
+  }
 }
 
 .btn-inline {
@@ -56,4 +60,13 @@ body {
   @media (max-width: $screen-xs) {
     display: none;
   }
+}
+
+.container-1920 {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1920px;
+  width: 100%;
+  align-items: center;
 }

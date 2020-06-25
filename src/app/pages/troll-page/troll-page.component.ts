@@ -31,7 +31,7 @@ interval: number = 1000;
   }
 
   ngOnDestroy() {
-    // clearInterval(this.pollingInterval);
+    clearInterval(this.pollingInterval);
   }
 
   createTrollForm() {
