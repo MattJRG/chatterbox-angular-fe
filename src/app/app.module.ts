@@ -28,6 +28,7 @@ import { LoginComponent } from './components/login/login.component';
 import { VerifyComponent } from './components/verify/verify.conponent';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { CheckMarkComponent } from './components/check-mark/check-mark.component';
 
 
 // Directives
@@ -63,6 +64,7 @@ import { ConnectorSerivce } from './services/connector.service';
     VerifyComponent,
     SpinnerComponent,
     ResetPasswordComponent,
+    CheckMarkComponent,
     // Directives
     HoverClassDirective
   ],

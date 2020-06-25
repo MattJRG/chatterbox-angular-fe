@@ -24,8 +24,8 @@ export class WelcomePageComponent implements OnInit {
     }
 
     this.activatedRoute.queryParams.subscribe(params => {
-      this.vToken = params['vToken'];
-      this.rKey = params['rKey'];
+      this.vToken = params['v-token'];
+      this.rKey = params['r-key'];
     })
   }
 

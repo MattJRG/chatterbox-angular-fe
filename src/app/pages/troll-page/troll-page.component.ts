@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ConnectorSerivce } from './../../services/connector.service';
 import { UserService } from './../../services/user.service';
@@ -8,7 +8,7 @@ import { UserService } from './../../services/user.service';
   templateUrl: './troll-page.component.html',
   styleUrls: ['./troll-page.component.scss']
 })
-export class TrollPageComponent implements OnInit {
+export class TrollPageComponent implements OnInit, OnDestroy {
 
 trollForm: FormGroup;
 error: any;
@@ -19,12 +19,19 @@ scrolled: boolean = false;
 initialLoad: boolean = true;
 totalPosts: number = 0;
 showEmojiMart: boolean = false;
+pollingInterval;
+interval: number = 1000;
 
   constructor(private connectorService: ConnectorSerivce, public userService: UserService) { }
 
   ngOnInit() {
     this.createTrollForm();
     this.loadAllPosts();
+    this.startDatabasePolling();
+  }
+
+  ngOnDestroy() {
+    // clearInterval(this.pollingInterval);
   }
 
   createTrollForm() {
@@ -37,7 +44,6 @@ showEmojiMart: boolean = false;
     // If this is the initial load fetch the last 100 posts
     if (this.initialLoad) {
       this.connectorService.getTrollPosts('query=initial').subscribe(response => {
-        console.log(response.body)
         this.totalPosts = response.body.totalPosts;
         this.posts = response.body.posts;
         setTimeout(() => {
@@ -48,11 +54,12 @@ showEmojiMart: boolean = false;
     // Else fetch the new posts and add them to the posts array
     } else {
       let lastPostId = this.getLastItemId(this.posts);
-      this.connectorService.getTrollPosts(lastPostId).subscribe(response => {
-        console.log(response.body)
+      this.connectorService.getTrollPosts(`query=latest&latestId=${lastPostId}`).subscribe(response => {
+        console.log(response);
         this.totalPosts = response.body.totalPosts;
-        this.posts = response.body.posts;
+        this.posts = [...this.posts, ...response.body.posts];
         setTimeout(() => {
+          // Need to check if user is currently scrolled up, if so don't scroll them..
           this.updateScroll();
         }, 10)
       })
@@ -62,13 +69,10 @@ showEmojiMart: boolean = false;
   // Need to run this function on scrolling to the top of the box..
   loadPrevious() {
     let firstPostId = this.getFirstItemId(this.posts);
-    this.connectorService.getTrollPosts(`latestId=${firstPostId}&query=previous`).subscribe(response => {
+    this.connectorService.getTrollPosts(`query=previous&earliestId=${firstPostId}`).subscribe(response => {
       console.log(response.body)
       this.totalPosts = response.body.totalPosts;
       this.posts = [...response.body.posts, ...this.posts];
-      // setTimeout(() => {
-      //   this.updateScroll();
-      // }, 10)
     })
   }
 
@@ -80,11 +84,10 @@ showEmojiMart: boolean = false;
     return arr[0].id
   }
 
-  loadPostsLoop() {
-    setTimeout(() => {
+  startDatabasePolling() {
+    this.pollingInterval = setInterval(() => {
       this.loadAllPosts();
-      this.loadPostsLoop();
-    }, 3000)
+    }, this.interval);
   }
 
   updateScroll() {
@@ -166,7 +169,6 @@ showEmojiMart: boolean = false;
         content: this.trollForm.controls.content.value
       };
       this.connectorService.postTrollPost(newPost).subscribe(response => {
-        console.log(response);
         this.trollForm.controls.content.reset();
         this.error = false;
         setTimeout(() => {
