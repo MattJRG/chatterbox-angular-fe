@@ -51,8 +51,7 @@ export class RegisterComponent implements OnInit{
     console.log(credentials);
     this.connectorService.register(credentials).subscribe((response) => {
       if (response.status === 200) {
-      console.log('Registration successful!');
-      console.log(response)
+        this.openLogin();
       }
     }, error => {
       if (error.status === 400) {
