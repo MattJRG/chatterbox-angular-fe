@@ -171,9 +171,6 @@ interval: number = 1000;
       this.connectorService.postTrollPost(newPost).subscribe(response => {
         this.trollForm.controls.content.reset();
         this.error = false;
-        setTimeout(() => {
-          this.loadAllPosts();
-        }, 1500)
       }, error => {
         if (error.status === 403) {
           this.error = 'Please login to post!';
