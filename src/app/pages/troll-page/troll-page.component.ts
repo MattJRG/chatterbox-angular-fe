@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ConnectorSerivce } from './../../services/connector.service';
 import { UserService } from './../../services/user.service';
@@ -15,12 +15,14 @@ error: any;
 errorCount: number = 0;
 dead = false;
 posts = [];
-scrolled: boolean = false;
 initialLoad: boolean = true;
 totalPosts: number = 0;
 showEmojiMart: boolean = false;
 pollingInterval;
 interval: number = 1000;
+count: number = 0;
+
+@ViewChild('trollboxContainer') trollbox: ElementRef;
 
   constructor(private connectorService: ConnectorSerivce, public userService: UserService) { }
 
@@ -55,13 +57,16 @@ interval: number = 1000;
     } else {
       let lastPostId = this.getLastItemId(this.posts);
       this.connectorService.getTrollPosts(`query=latest&latestId=${lastPostId}`).subscribe(response => {
-        console.log(response);
+        this.evaluatePollingFrequency(response);
         this.totalPosts = response.body.totalPosts;
-        this.posts = [...this.posts, ...response.body.posts];
-        setTimeout(() => {
-          // Need to check if user is currently scrolled up, if so don't scroll them..
-          this.updateScroll();
-        }, 10)
+        this.posts = this.addLatestPosts(this.posts, response.body.posts);
+
+        if (Math.ceil(this.trollbox.nativeElement.scrollHeight - this.trollbox.nativeElement.scrollTop) === this.trollbox.nativeElement.clientHeight) {
+          setTimeout(() => {
+            // Need to check if user is currently scrolled up, if so don't scroll them..
+            this.updateScroll();
+          }, 10)
+        }
       })
     }
   }
@@ -70,10 +75,22 @@ interval: number = 1000;
   loadPrevious() {
     let firstPostId = this.getFirstItemId(this.posts);
     this.connectorService.getTrollPosts(`query=previous&earliestId=${firstPostId}`).subscribe(response => {
-      console.log(response.body)
       this.totalPosts = response.body.totalPosts;
       this.posts = [...response.body.posts, ...this.posts];
     })
+  }
+
+  addLatestPosts(oldArr, newArr) {
+    let oldIds = [];
+    oldArr.forEach(el => {
+      oldIds.push(el.id)
+    });
+    newArr.forEach(el => {
+      if (!oldIds.includes(el.id)){
+        oldArr.push(el);
+      }
+    })
+    return oldArr;
   }
 
   getLastItemId(arr) {
@@ -91,9 +108,26 @@ interval: number = 1000;
   }
 
   updateScroll() {
-    if (!this.scrolled) {
-      var element = document.getElementById("trollbox-container");
-      element.scrollTop = element.scrollHeight - 50;
+    this.trollbox.nativeElement.scrollTop = this.trollbox.nativeElement.scrollHeight - 50;
+  }
+
+  // Determine if we need to poll the database as often as we are
+  evaluatePollingFrequency(response) {
+    if (response.body.posts.length === 0 && this.interval === 1000) {
+      clearInterval(this.pollingInterval);
+      this.interval = 3000;
+      this.startDatabasePolling();
+    } else if (response.body.posts.length === 0 && this.interval === 3000) {
+      if (this.count < 10) this.count++;
+      else {
+        clearInterval(this.pollingInterval);
+        this.interval = 30000;
+        this.startDatabasePolling();
+      }
+    } else if (response.body.posts.length > 0 && this.interval > 1000) {
+      clearInterval(this.pollingInterval);
+      this.interval = 1000;
+      this.startDatabasePolling();
     }
   }
 
@@ -171,6 +205,11 @@ interval: number = 1000;
       this.connectorService.postTrollPost(newPost).subscribe(response => {
         this.trollForm.controls.content.reset();
         this.error = false;
+        if (this.interval > 1000) {
+          clearInterval(this.pollingInterval);
+          this.interval = 1000;
+          this.startDatabasePolling();
+        }
       }, error => {
         if (error.status === 403) {
           this.error = 'Please login to post!';

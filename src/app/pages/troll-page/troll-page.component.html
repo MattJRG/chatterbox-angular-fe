@@ -1,7 +1,7 @@
 <div *ngIf="!dead && userService.isLoggedIn()">
   <br>
   <h3 class="troll-feed">Trollbox</h3>
-  <div class="trollbox-container" id="trollbox-container">
+  <div class="trollbox-container" #trollboxContainer>
     <button *ngIf="!allPostsFetched" class="btn btn-primary" (click)="loadPrevious()">Load Previous</button>
     <p class="text--center text--muted" *ngIf="allPostsFetched">Start of history...</p>
     <div class="bubble-container" *ngFor="let post of posts; let i = index" [ngSwitch]="post.alt">
