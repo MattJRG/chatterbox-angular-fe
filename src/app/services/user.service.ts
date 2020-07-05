@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/interfaces';
+import { CurrentUser } from '../models/interfaces';
 import { ConnectorSerivce } from './connector.service';
 import { Router } from "@angular/router";
 
@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
   providedIn: 'root'
 })
 export class UserService {
-  selectedUser: User = {
+  selectedUser: CurrentUser = {
     username: '',
     email: '',
     password: ''

@@ -29,6 +29,7 @@ import { VerifyComponent } from './components/verify/verify.conponent';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { CheckMarkComponent } from './components/check-mark/check-mark.component';
+import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 
 
 // Directives
@@ -65,6 +66,7 @@ import { ConnectorSerivce } from './services/connector.service';
     SpinnerComponent,
     ResetPasswordComponent,
     CheckMarkComponent,
+    ChatBoxComponent,
     // Directives
     HoverClassDirective
   ],

@@ -1,76 +1,37 @@
-<div *ngIf="!dead && userService.isLoggedIn()">
-  <br>
-  <h3 class="troll-feed">Trollbox</h3>
-  <div class="trollbox-container" #trollboxContainer>
-    <button *ngIf="!allPostsFetched" class="btn btn-primary" (click)="loadPrevious()">Load Previous</button>
-    <p class="text--center text--muted" *ngIf="allPostsFetched">Start of history...</p>
-    <div class="bubble-container" *ngFor="let post of posts; let i = index" [ngSwitch]="post.alt">
-      <div *ngIf="i > 0 && post.userId !== posts[i - 1].userId" [class.recipient-title]="post.alt" [class.sender-title]="!post.alt">
-        <br>
-        <p class="text--sm">{{post.username}}</p>
+<div class="page-container">
+
+  <div *ngIf="userService.isLoggedIn()">
+    <app-chat-box
+      [chatTitle]="'Trollbox'"
+      [participants]="['trollbox']">
+    </app-chat-box>
+  </div>
+
+  <div class="active-user-container">
+    <h4>Active users</h4>
+    <p>Friends</p>
+    <div *ngFor="let friend of friends">
+      <div class="active-user-row"
+      (mouseenter)="friend.hover=true"
+      (mouseleave)="friend.hover=false">
+        <p class="friend text--no-margin">{{ friend.username }}</p>
+        <a *ngIf="friend.hover" routerLink="/chat/{{friend.userId}}">Chat</a>
       </div>
-      <div *ngIf="i === 0" [class.recipient-title]="post.alt" [class.sender-title]="!post.alt">
-        <p class="text--sm">{{post.username}}</p>
+    </div>
+    <hr>
+    <p>Others</p>
+    <div *ngFor="let user of users">
+      <div class="active-user-row"
+      (mouseenter)="user.hover=true"
+      (mouseleave)="user.hover=false">
+        <p class="text--no-margin">{{ user.username }}</p>
+        <p *ngIf="user.hover && !user.pending" class="btn-add text--no-margin" (click)="sendFriendRequest()">+</p>
+        <p *ngIf="user.hover && user.pending" class="text--no-margin" (click)="sendFriendRequest()">pending..</p>
       </div>
-      <div
-        *ngSwitchCase="true"
-        class="post-bubble recipient"
-        [class.first]="isFirstPost(i, post, posts)"
-        [class.middle]="isMiddlePost(i, post, posts)"
-        [class.last]="isLastPost(i, post, posts)">
-        {{post.content}}
-      </div>
-      <div
-        *ngSwitchCase="false"
-        class="post-bubble sender"
-        (mouseenter)="post.hover=true"
-        (mouseleave)="post.hover=false"
-        [class.first]="isFirstPost(i, post, posts)"
-        [class.middle]="isMiddlePost(i, post, posts)"
-        [class.last]="isLastPost(i, post, posts)">
-        <span *ngIf="!post.edit">{{post.content}}</span>
-        <!-- <span *ngIf="post.hover && !post.edit"><button class="btn btn-danger" (click)="post.edit = true">edit</button></span> -->
-        <!-- <span *ngIf="post.edit" contenteditable class="input--edit-post">{{post.content}}</span> -->
-      </div>
-      <!-- <div [hidden]="!post.edited">edited</div> -->
     </div>
   </div>
-  <form [formGroup]="trollForm" class="troll-form">
-    <div class="troll-form--left">
-      <div class="troll-form--left-input">
-        <input
-          autocomplete="null"
-          name="contentInput"
-          id="contentInput"
-          class="form-control"
-          formControlName="content"
-          placeholder="Type here...">
-        <small *ngIf="!error" id="contentHelp" class="form-text text-muted">We welcome your troll posts, they're safe with us.</small>
-        <small *ngIf="error" class="error-message">{{error}}</small>
-      </div>
-      <div class="troll-form--left-emoji" (click)="toggleEmojiMart()">
-        <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24m0 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20M8 7a2 2 0 1 0 0 4 2 2 0 0 0 0-4m8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-.8 8c-.7 1.2-1.8 2-3.3 2-1.5 0-2.7-.8-3.4-2H15m3-2H6a6 6 0 1 0 12 0"></path></svg>
-      </div>
-    </div>
-    <div class="troll-form--right">
-      <button class="btn btn-danger btn-post" (click)="onSubmit()">
-        <img class="send-image" src="../../../assets/images/send--white.png">
-      </button>
-    </div>
-    <emoji-mart
-      *ngIf="showEmojiMart"
-      title="Pick your emoji…"
-      emoji="point_up"
-      (emojiClick)="addEmoji($event)"
-      [style]="{ position: 'absolute', bottom: '250px', right: '10px' }" >
-    </emoji-mart>
-  </form>
-
 
 </div>
 <div *ngIf="!userService.isLoggedIn()" class="container-vh">
   <h2 class="text--center">Session expired, <a routerLink="/welcome">return to welcome page</a></h2>
-</div>
-<div *ngIf="dead" class="container-vh">
-  <img class="mad-troll-logo" width="600" alt="Troll Logo" src="../../../assets/images/angry-troll.png">
 </div>

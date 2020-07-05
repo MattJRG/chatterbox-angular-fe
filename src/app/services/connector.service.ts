@@ -1,7 +1,6 @@
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
 import { Injectable } from "@angular/core";
-import { User } from './../models/interfaces';
 
 @Injectable()
 export class ConnectorSerivce {
@@ -76,5 +75,10 @@ export class ConnectorSerivce {
 
   reset = (postData): Observable<any> => {
     return this.apiService.post(`${this.API_URL}/api/reset`, postData, true);
+  }
+
+  // Users
+  getActiveUsers = (): Observable<any> => {
+    return this.apiService.get(`${this.API_URL}/api/users`);
   }
 }
