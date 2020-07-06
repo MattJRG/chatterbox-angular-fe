@@ -48,7 +48,7 @@ export class ConnectorSerivce {
 
   // To be done
   deactivate = (putData): Observable<any> => {
-    return this.apiService.put(`${this.API_URL}/api/deactivate`, putData, true);
+    return this.apiService.put(`${this.API_URL}/api/deactivate`, putData);
   }
 
 
