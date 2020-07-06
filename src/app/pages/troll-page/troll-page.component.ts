@@ -46,12 +46,12 @@ export class TrollPageComponent {
     //     friend: false
     //   },
     // ]
-    this.getActiveUsers();
+    this.fetchOnlineUsers();
   }
 
-  getActiveUsers() {
-    this.connectorService.getActiveUsers().subscribe(response => {
-      this.users = response.body.activeUsers;
+  fetchOnlineUsers() {
+    this.connectorService.getOnlineUsers().subscribe(response => {
+      this.users = response.body.onlineUsers;
       this.loadingUsers = false;
     }, error => {
       console.log('There was an error fetching active users!')

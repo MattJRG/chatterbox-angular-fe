@@ -5,7 +5,6 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class ConnectorSerivce {
 
-
   API_URL: string;
   API_Login_URL: string;
 
@@ -22,51 +21,21 @@ export class ConnectorSerivce {
     }
   }
 
-  // Rhymes
-  getRhymesPosts = (): Observable<any> => {
-    return this.apiService.get(`${this.API_URL}/rhymes`);
-  }
-
-  postRhymes = (postData): Observable<any> => {
-    return this.apiService.post(`${this.API_URL}/rhymes`, postData);
-  }
-
-  // Users
-  getUsers = (): Observable<any> => {
-    return this.apiService.get(`${this.API_URL}/user`);
-  }
-
-  getUsersById = (id): Observable<any> => {
-    return this.apiService.get(`${this.API_URL}/user`);
-  }
-
-  createUser = (postData): Observable<any> => {
-    return this.apiService.post(`${this.API_URL}/user`, postData);
-  }
-
-  // Trolls
-  getTrollPosts = (query): Observable<any> => {
-    return this.apiService.get(`${this.API_URL}/trolls?${query}`);
-  }
-
-  postTrollPost = (postData): Observable<any> => {
-    return this.apiService.post(`${this.API_URL}/trolls`, postData);
+  // Account
+  register = (postData): Observable<any> => {
+    return this.apiService.post(`${this.API_URL}/api/register`, postData, true);
   }
 
   login = (credentials): Observable<any> => {
     return this.apiService.post(`${this.API_URL}/api/authenticate`, credentials, true);
   }
 
-  register = (postData): Observable<any> => {
-    return this.apiService.post(`${this.API_URL}/api/register`, postData, true);
+  verify = (token): Observable<any> => {
+    return this.apiService.get(`${this.API_URL}/api/verify?token=${token}`, true);
   }
 
   logout = (): Observable<any> => {
     return this.apiService.post(`${this.API_URL}/api/logout`, {})
-  }
-
-  verify = (token): Observable<any> => {
-    return this.apiService.get(`${this.API_URL}/api/verify?token=${token}`, true);
   }
 
   forgot = (email): Observable<any> => {
@@ -77,8 +46,48 @@ export class ConnectorSerivce {
     return this.apiService.post(`${this.API_URL}/api/reset`, postData, true);
   }
 
+  // To be done
+  deactivate = (putData): Observable<any> => {
+    return this.apiService.put(`${this.API_URL}/api/deactivate`, putData, true);
+  }
+
+
+  // Rhymes
+  getRhymesPosts = (): Observable<any> => {
+    return this.apiService.get(`${this.API_URL}/rhymes`);
+  }
+
+  postRhymes = (postData): Observable<any> => {
+    return this.apiService.post(`${this.API_URL}/rhymes`, postData);
+  }
+
   // Users
-  getActiveUsers = (): Observable<any> => {
+
+  // Should return an array of friends and other online users
+  // Will have a friend request property
+  getOnlineUsers = (): Observable<any> => {
     return this.apiService.get(`${this.API_URL}/api/users`);
+  }
+
+  addFriend = (): Observable<any> => {
+    return this.apiService.put(`${this.API_URL}/api/users`, {});
+  }
+
+  respondToFriendRequest = (): Observable<any> => {
+    return this.apiService.post(`${this.API_URL}/api/users`, {});
+  }
+
+  removeFriend = (): Observable<any> => {
+    return this.apiService.post(`${this.API_URL}/api/users`, {});
+  }
+
+
+  // Trolls
+  getTrollPosts = (query): Observable<any> => {
+    return this.apiService.get(`${this.API_URL}/trolls?${query}`);
+  }
+
+  postTrollPost = (postData): Observable<any> => {
+    return this.apiService.post(`${this.API_URL}/trolls`, postData);
   }
 }
