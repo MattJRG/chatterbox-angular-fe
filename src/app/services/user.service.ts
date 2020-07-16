@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CurrentUser } from '../models/interfaces';
-import { ConnectorSerivce } from './connector.service';
+import { ConnectorService } from './connector.service';
 import { Router } from "@angular/router";
 
 @Injectable({
@@ -13,7 +13,7 @@ export class UserService {
     password: ''
   };
 
-  constructor(private connectorService: ConnectorSerivce, private router: Router) {}
+  constructor(private connectorService: ConnectorService, private router: Router) {}
 
   //Helper Methods
 

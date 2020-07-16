@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ConnectorSerivce } from './../../services/connector.service';
+import { ConnectorService } from './../../services/connector.service';
 import { UserService } from './../../services/user.service';
 
 @Component({
@@ -23,19 +23,14 @@ pollingInterval;
 interval: number = 1000;
 count: number = 0;
 
-isTrollbox: boolean;
-
-@Input() chatTitle: string;
-@Input() participants: string[];
+@Input() conversationId: string;
+@Input() conversationTitle: string;
 
 @ViewChild('chatboxContainer') chatbox: ElementRef;
 
-  constructor(private connectorService: ConnectorSerivce, public userService: UserService) { }
+  constructor(private connectorService: ConnectorService, public userService: UserService) { }
 
   ngOnInit() {
-    if (this.participants.includes("trollbox")) {
-      this.isTrollbox = true;
-    }
     this.createChatInputForm();
     this.loadAllPosts();
     this.startDatabasePolling();

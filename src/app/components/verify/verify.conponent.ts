@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { ConnectorSerivce } from './../../services/connector.service';
+import { ConnectorService } from './../../services/connector.service';
 
 @Component({
   selector: 'app-verify',
@@ -14,7 +14,7 @@ export class VerifyComponent implements OnInit {
   loading: boolean = true;
   success: boolean;
 
-  constructor(private connectorSerivce: ConnectorSerivce) {}
+  constructor(private connectorSerivce: ConnectorService) {}
 
   ngOnInit() {
     if (this.vToken) {

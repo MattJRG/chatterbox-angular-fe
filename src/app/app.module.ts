@@ -18,6 +18,7 @@ import { TrollPageComponent } from './pages/troll-page/troll-page.component';
 import { UploadComponent } from './pages/upload/upload.component';
 import { SubmitRhymesComponent } from './pages/submit-rhymes/submit-rhymes.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component'
+import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 
 
 // Components
@@ -30,6 +31,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { CheckMarkComponent } from './components/check-mark/check-mark.component';
 import { ChatBoxComponent } from './components/chat-box/chat-box.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 
 // Directives
@@ -45,7 +47,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 
 // Services
 import { ApiService } from './services/api.service';
-import { ConnectorSerivce } from './services/connector.service';
+import { ConnectorService } from './services/connector.service';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { ConnectorSerivce } from './services/connector.service';
     UploadComponent,
     SubmitRhymesComponent,
     NotFoundComponent,
+    ChatPageComponent,
     // Components
     AppHeader,
     FooterComponent,
@@ -67,6 +70,7 @@ import { ConnectorSerivce } from './services/connector.service';
     ResetPasswordComponent,
     CheckMarkComponent,
     ChatBoxComponent,
+    UserListComponent,
     // Directives
     HoverClassDirective
   ],
@@ -85,7 +89,7 @@ import { ConnectorSerivce } from './services/connector.service';
       multi: true
     },
     ApiService,
-    ConnectorSerivce
+    ConnectorService
   ],
   bootstrap: [AppComponent]
 })

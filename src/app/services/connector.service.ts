@@ -3,12 +3,12 @@ import { Observable } from 'rxjs';
 import { Injectable } from "@angular/core";
 
 @Injectable()
-export class ConnectorSerivce {
+export class ConnectorService {
 
   API_URL: string;
   API_Login_URL: string;
 
-  constructor(private apiService: ApiService){
+  constructor(private apiService: ApiService) {
     if (window.location.hostname === 'localhost') {
       // this.API_URL = 'http://localhost:5000';
       this.API_URL= 'http://localhost:3000';
@@ -27,7 +27,7 @@ export class ConnectorSerivce {
   }
 
   login = (credentials): Observable<any> => {
-    return this.apiService.post(`${this.API_URL}/api/authenticate`, credentials, true);
+    return this.apiService.post(`${this.API_URL}/api/login`, credentials, true);
   }
 
   verify = (token): Observable<any> => {
@@ -65,20 +65,20 @@ export class ConnectorSerivce {
 
   // Should return an array of friends and other online users
   // Will have a friend request property
-  getOnlineUsers = (): Observable<any> => {
-    return this.apiService.get(`${this.API_URL}/api/users`);
+  getUsers = (): Observable<any> => {
+    return this.apiService.get(`${this.API_URL}/api/get_users`);
   }
 
-  addFriend = (): Observable<any> => {
-    return this.apiService.put(`${this.API_URL}/api/users`, {});
+  addFriend = (userId): Observable<any> => {
+    return this.apiService.post(`${this.API_URL}/api/add_friend`, {userId: userId});
   }
 
-  respondToFriendRequest = (): Observable<any> => {
-    return this.apiService.post(`${this.API_URL}/api/users`, {});
+  respondToFriendRequest = (requestResponseData): Observable<any> => {
+    return this.apiService.post(`${this.API_URL}/api/respond_friend_request`, requestResponseData);
   }
 
   removeFriend = (): Observable<any> => {
-    return this.apiService.post(`${this.API_URL}/api/users`, {});
+    return this.apiService.post(`${this.API_URL}/api/remove_friend`, {});
   }
 
 
@@ -89,5 +89,17 @@ export class ConnectorSerivce {
 
   postTrollPost = (postData): Observable<any> => {
     return this.apiService.post(`${this.API_URL}/trolls`, postData);
+  }
+
+
+  // Conversations
+  getConversation = (query): Observable<any> => {
+    return this.apiService.get(`${this.API_URL}/conversation?${query}`)
+  }
+
+
+  // Messages
+  getMessages = (query): Observable<any> => {
+    return this.apiService.get(`${this.API_URL}/message?${query}`)
   }
 }

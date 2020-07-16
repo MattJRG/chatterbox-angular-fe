@@ -1,6 +1,6 @@
 <div *ngIf="!dead && userService.isLoggedIn()">
   <br>
-  <h3 class="troll-feed">{{ chatTitle }}</h3>
+  <h3 class="troll-feed">{{ conversationTitle }}</h3>
   <div class="trollbox-container" #chatboxContainer>
     <button *ngIf="!allPostsFetched" class="btn btn-primary" (click)="loadPrevious()">Load Previous</button>
     <p class="text--center text--muted" *ngIf="allPostsFetched">Start of history...</p>

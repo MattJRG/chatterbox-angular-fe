@@ -7,6 +7,14 @@ export class CurrentUser {
 export class User {
   username: string;
   friend: boolean;
+  pendingFriend: boolean;
   userId: string;
-  pending?: boolean;
+}
+
+export class Users {
+  pendingRequests: User[];
+  onlineFriends: User[];
+  onlineUsers: User[];
+  offlineFriends: User[];
+  offlineUsers: User[];
 }

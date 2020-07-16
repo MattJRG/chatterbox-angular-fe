@@ -1,0 +1,36 @@
+@import '../../../sass/base/variables';
+
+.active-user-container {
+  background: $dark;
+  width: 200px;
+  color: $white;
+  padding: 1rem;
+  margin: 4rem 0 5.5rem;
+}
+
+.active-user-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.friend {
+  color: $olive;
+}
+
+hr {
+  border-top: 1px solid white;
+}
+
+.btn-add {
+  color: $blue;
+  cursor: pointer;
+}
+
+.btn-add:hover {
+  color: $olive;
+}
+
+.chat-link {
+  cursor: pointer;
+}

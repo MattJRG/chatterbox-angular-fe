@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ConnectorSerivce } from './../../services/connector.service';
+import { ConnectorService } from './../../services/connector.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit{
   error: string;
   @Output() stateChange = new EventEmitter();
 
-  constructor(private connectorService: ConnectorSerivce) {}
+  constructor(private connectorService: ConnectorService) {}
 
   ngOnInit() {
     this.createRegistrationForm();

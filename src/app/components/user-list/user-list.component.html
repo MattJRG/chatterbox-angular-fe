@@ -1,0 +1,63 @@
+<div *ngIf="!loadingUsers" class="active-user-container">
+  <h4>Online</h4>
+  <div *ngIf="users.pendingRequests.length > 0">
+    <p>Friend requests</p>
+    <div *ngFor="let user of users.pendingRequests">
+      <div class="active-user-row"
+      (mouseenter)="user.hover=true"
+      (mouseleave)="user.hover=false">
+        <p class="text--no-margin">{{ user.username }}</p>
+        <p *ngIf="user.hover" class="btn-add text--no-margin" (click)="respondRequest(user.userId, true)">✓</p>
+        <p *ngIf="user.hover" class="btn-add text--no-margin" (click)="respondRequest(user.userId, false)">✗</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="users.onlineFriends.length > 0">
+    <p>Friends</p>
+    <div *ngFor="let friend of users.onlineFriends">
+      <div class="active-user-row"
+      (mouseenter)="friend.hover=true"
+      (mouseleave)="friend.hover=false">
+        <p class="friend text--no-margin">{{ friend.username }}</p>
+        <a *ngIf="friend.hover" routerLink="/chat/{{friend.userId}}">Chat</a>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <p>Others online</p>
+  <div *ngFor="let user of users.onlineUsers">
+    <div class="active-user-row"
+    (mouseenter)="user.hover=true"
+    (mouseleave)="user.hover=false">
+      <p class="text--no-margin">{{ user.username }}</p>
+      <p *ngIf="user.hover && !user.pending" class="btn-add text--no-margin" (click)="sendFriendRequest(user)">+</p>
+      <p *ngIf="user.hover && user.pending" class="text--no-margin">pending..</p>
+    </div>
+  </div>
+  <hr>
+  <h4>Offline</h4>
+  <div *ngIf="users.offlineFriends.length > 0">
+    <p>Friends</p>
+    <div *ngFor="let friend of users.offlineFriends">
+      <div class="active-user-row"
+      (mouseenter)="friend.hover=true"
+      (mouseleave)="friend.hover=false">
+        <p class="friend text--no-margin">{{ friend.username }}</p>
+        <a class="chat-link" *ngIf="friend.hover" (click)="switchConversation(friend.userId)">Chat</a>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <p>Others</p>
+  <div *ngFor="let user of users.offlineUsers">
+    <div class="active-user-row"
+    (mouseenter)="user.hover=true"
+    (mouseleave)="user.hover=false">
+      <p class="text--no-margin">{{ user.username }}</p>
+      <p *ngIf="user.hover && !user.pendingFriend" class="btn-add text--no-margin" (click)="sendFriendRequest(user)">+</p>
+      <p *ngIf="user.hover && user.pendingFriend" class="text--no-margin">pending..</p>
+    </div>
+  </div>
+  <hr>
+</div>

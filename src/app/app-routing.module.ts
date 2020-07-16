@@ -1,3 +1,4 @@
+import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 // Imports
 import { UploadComponent } from './pages/upload/upload.component';
 import { NgModule } from '@angular/core';
@@ -16,6 +17,7 @@ const appRoutes: Routes = [
   { path: 'home', component: HomepageComponent, canActivate:[AuthGuard] },
   { path: 'welcome',  component: WelcomePageComponent },
   { path: 'trollbox', component: TrollPageComponent, canActivate:[AuthGuard] },
+  { path: 'chat', component: ChatPageComponent, canActivate:[AuthGuard] },
   // { path: 'rhymes', component: SubmitRhymesComponent, canActivate:[AuthGuard] },
   // { path: 'upload', component: UploadComponent, canActivate:[AuthGuard] },
   {

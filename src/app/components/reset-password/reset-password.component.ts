@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ConnectorSerivce } from '../../services/connector.service';
+import { ConnectorService } from '../../services/connector.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -19,7 +19,7 @@ export class ResetPasswordComponent implements OnInit{
   resetPasswordForm: FormGroup;
 
   constructor(
-    private connectorService: ConnectorSerivce,
+    private connectorService: ConnectorService,
     private route:ActivatedRoute
   ) {}
 

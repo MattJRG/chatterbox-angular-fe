@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConnectorSerivce } from './../../services/connector.service';
+import { ConnectorService } from './../../services/connector.service';
 
 @Component({
   selector: 'app-submit-rhymes',
@@ -24,7 +24,7 @@ export class SubmitRhymesComponent implements OnInit {
     }
   ];
 
-  constructor(private connectorService: ConnectorSerivce) { }
+  constructor(private connectorService: ConnectorService) { }
 
   ngOnInit() {
     console.log(this.words.length)

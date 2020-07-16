@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ConnectorSerivce } from './../../services/connector.service';
+import { ConnectorService } from './../../services/connector.service';
 import { UserService } from './../../services/user.service';
 import { Router } from '@angular/router';
 
@@ -18,7 +18,7 @@ error: string;
 @Output() stateChange = new EventEmitter();
 
 constructor(
-  private connectorService: ConnectorSerivce,
+  private connectorService: ConnectorService,
   private userService: UserService,
   private router: Router) {}
 
@@ -49,7 +49,7 @@ ngOnInit() {
         localStorage.removeItem("token");
         localStorage.setItem('user', response.body.username);
         this.userService.setToken(response.body.token);
-        this.router.navigateByUrl('/trollbox')
+        this.router.navigateByUrl('/chat')
       }
     }, error => {
       if (error.status === 404) {

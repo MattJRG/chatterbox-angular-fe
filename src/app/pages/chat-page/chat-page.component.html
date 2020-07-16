@@ -2,12 +2,14 @@
 
   <div *ngIf="userService.isLoggedIn()">
     <app-chat-box
-      [conversationTitle]="'Trollbox'"
-      conversationId='trollbox'>
+      [conversationTitle]="conversationTitle"
+      [conversationId]="conversationId">
     </app-chat-box>
   </div>
 
-  <app-user-list></app-user-list>
+  <app-user-list
+    (changeConversation)="switchConversation($event)">
+  </app-user-list>
 
 </div>
 <div *ngIf="!userService.isLoggedIn()" class="container-vh">
