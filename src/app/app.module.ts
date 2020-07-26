@@ -32,6 +32,9 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { CheckMarkComponent } from './components/check-mark/check-mark.component';
 import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
+import { ChatContentComponent } from './components/chat-box/chat-content/chat-content.component';
+
 
 
 // Directives
@@ -48,6 +51,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 // Services
 import { ApiService } from './services/api.service';
 import { ConnectorService } from './services/connector.service';
+import { ConversationService } from './services/conversation.service';
 
 @NgModule({
   declarations: [
@@ -71,6 +75,8 @@ import { ConnectorService } from './services/connector.service';
     CheckMarkComponent,
     ChatBoxComponent,
     UserListComponent,
+    ConversationListComponent,
+    ChatContentComponent,
     // Directives
     HoverClassDirective
   ],
@@ -89,7 +95,8 @@ import { ConnectorService } from './services/connector.service';
       multi: true
     },
     ApiService,
-    ConnectorService
+    ConnectorService,
+    ConversationService
   ],
   bootstrap: [AppComponent]
 })

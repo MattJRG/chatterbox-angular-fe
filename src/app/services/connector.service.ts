@@ -97,9 +97,16 @@ export class ConnectorService {
     return this.apiService.get(`${this.API_URL}/conversation?${query}`)
   }
 
+  getAllConversations = (): Observable<any> => {
+    return this.apiService.get(`${this.API_URL}/conversation/user`)
+  }
 
   // Messages
   getMessages = (query): Observable<any> => {
     return this.apiService.get(`${this.API_URL}/message?${query}`)
+  }
+
+  postMessage = (query, postData): Observable<any> => {
+    return this.apiService.post(`${this.API_URL}/message?${query}`, postData);
   }
 }

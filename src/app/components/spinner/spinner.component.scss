@@ -32,3 +32,8 @@
     transform: rotate(360deg);
   }
 }
+
+.white-spinner:after {
+  border: 6px solid $white;
+  border-color: $white transparent $white transparent;
+}

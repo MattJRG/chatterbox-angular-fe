@@ -1,15 +1,38 @@
-<div class="page-container">
+<div *ngIf="userService.isLoggedIn()" class="page-container">
 
-  <div *ngIf="userService.isLoggedIn()">
+  <div class="col sidebar sidebar--left">
+    <div class="show-at-lt-screen-lg">
+      <div class="switcher d-flex">
+        <div class="sidebar-tab" [class.sidebar-tab--active]="sidebarTab === 'chats'" (click)="sidebarTab = 'chats'">
+          <p class="text--no-margin">Chats</p>
+        </div>
+        <div class="sidebar-tab" [class.sidebar-tab--active]="sidebarTab === 'users'" (click)="sidebarTab = 'users'">
+          <p class="text--no-margin">Users</p>
+        </div>
+      </div>
+    </div>
+    <app-conversation-list
+      [class.hide-at-lt-screen-lg]="sidebarTab !== 'chats'"
+      (changeConversation)="switchToConversation($event)">
+    </app-conversation-list>
+    <app-user-list
+      [hidden]="sidebarTab !== 'users'"
+      class="show-at-lt-screen-lg"
+      (changeConversation)="switchConversation($event)">
+    </app-user-list>
+  </div>
+
+  <div class="col-8">
     <app-chat-box
-      [conversationTitle]="conversationTitle"
-      [conversationId]="conversationId">
+      [loading]="conversationLoading">
     </app-chat-box>
   </div>
 
-  <app-user-list
-    (changeConversation)="switchConversation($event)">
-  </app-user-list>
+  <div class="col sidebar hide-at-lt-screen-lg">
+    <app-user-list
+      (changeConversation)="switchConversation($event)">
+    </app-user-list>
+  </div>
 
 </div>
 <div *ngIf="!userService.isLoggedIn()" class="container-vh">

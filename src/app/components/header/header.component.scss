@@ -2,7 +2,7 @@
 @import '../../../sass/base/variables';
 
 .header {
-  position: fixed;
+  position: relative;
   background-color: $dark;
   display: flex;
   justify-content: space-between;

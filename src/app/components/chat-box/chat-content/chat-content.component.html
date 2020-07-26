@@ -1,0 +1,34 @@
+<div class="trollbox-container" #chatboxContainer>
+  <button *ngIf="!allMessagesFetched" class="btn btn-primary" (click)="loadPrevious()">Load Previous</button>
+  <p class="text--center text--muted" *ngIf="allMessagesFetched">Start of history...</p>
+  <div class="bubble-container" *ngFor="let message of messages; let i = index" [ngSwitch]="message.alt">
+    <div *ngIf="i > 0 && message.userId !== messages[i - 1].userId" [class.recipient-title]="message.alt" [class.sender-title]="!message.alt">
+      <br>
+      <p class="text--sm">{{ message.username }}</p>
+    </div>
+    <div *ngIf="i === 0" [class.recipient-title]="message.alt" [class.sender-title]="!message.alt">
+      <p class="text--sm">{{ message.username }}</p>
+    </div>
+    <div
+      *ngSwitchCase="true"
+      class="message-bubble recipient"
+      [class.first]="isFirstMessage(i, message, messages)"
+      [class.middle]="isMiddleMessage(i, message, messages)"
+      [class.last]="isLastMessage(i, message, messages)">
+      {{ message.content }}
+    </div>
+    <div
+      *ngSwitchCase="false"
+      class="message-bubble sender"
+      (mouseenter)="message.hover=true"
+      (mouseleave)="message.hover=false"
+      [class.first]="isFirstMessage(i, message, messages)"
+      [class.middle]="isMiddleMessage(i, message, messages)"
+      [class.last]="isLastMessage(i, message, messages)">
+      <span *ngIf="!message.edit">{{ message.content }}</span>
+      <!-- <span *ngIf="message.hover && !message.edit"><button class="btn btn-danger" (click)="message.edit = true">edit</button></span> -->
+      <!-- <span *ngIf="message.edit" contenteditable class="input--edit-message">{{message.content}}</span> -->
+    </div>
+    <!-- <div [hidden]="!message.edited">edited</div> -->
+  </div>
+</div>

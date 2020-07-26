@@ -1,12 +1,12 @@
 @import '../../../sass/base/variables';
 
 .footer {
-  min-height: 120px;
-  bottom: 0;
+  position: relative;
+  min-height: 100px;
   width: 100%;
   background: $dark;
   color: $white;
-  padding: 2rem;
+  padding: 1.5rem;
 
   @media (max-width: $screen-xs) {
     padding: 1rem;

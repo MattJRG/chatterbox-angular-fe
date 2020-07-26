@@ -1,6 +1,6 @@
 @import '../../../sass/base/variables';
 
-.active-user-container {
+.conversation-container {
   display: flex;
   flex: 1 1 auto;
   flex-flow: column;
@@ -10,32 +10,19 @@
   width: 100%;
   color: $white;
   padding: 1rem;
-  // margin-top: 4rem;
 }
 
-.active-user-row {
+.conversation-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.friend {
-  color: $olive;
 }
 
 hr {
   border-top: 1px solid white;
 }
 
-.btn-add {
-  color: $blue;
+.chat-link:hover {
   cursor: pointer;
-}
-
-.btn-add:hover {
   color: $olive;
-}
-
-.chat-link {
-  cursor: pointer;
 }

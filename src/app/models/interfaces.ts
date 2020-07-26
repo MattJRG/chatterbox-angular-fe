@@ -18,3 +18,8 @@ export class Users {
   offlineFriends: User[];
   offlineUsers: User[];
 }
+
+export class Conversation {
+  _id: string;
+  title: string;
+}

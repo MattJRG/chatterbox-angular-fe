@@ -1,0 +1,70 @@
+@import '../../../../sass/base/variables';
+
+.trollbox-container {
+  margin: 0 auto;
+  max-width: 1000px;
+  min-width: 280px;
+  width: 100%;
+  background: $dark;
+  padding: 1.5rem;
+  overflow-y: scroll;
+  height: 70vh;
+}
+
+.bubble-container {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.message-bubble {
+  border-radius: 1em;
+  padding: 0.25em 0.75em;
+  margin: 0.0625em;
+  max-width: 50%;
+}
+
+.sender {
+  align-self: flex-start;
+  background-color: $olive;
+  color: $white;
+
+  &.first { border-bottom-left-radius: 0.1em; }
+  &.last { border-top-left-radius: 0.1em; }
+  &.middle {
+    border-bottom-left-radius: 0.1em;
+     border-top-left-radius: 0.1em;
+  }
+}
+
+.sender-title {
+  align-self: flex-start;
+  color: $olive;
+}
+
+.recipient-title {
+  align-self: flex-end;
+  color: $blue;
+}
+
+.recipient {
+  align-self: flex-end;
+  background-color: $blue;
+  color: #fff;
+
+  &.first { border-bottom-right-radius: 0.1em; }
+  &.last { border-top-right-radius: 0.1em; }
+  &.middle {
+    border-bottom-right-radius: 0.1em;
+    border-top-right-radius: 0.1em;
+  }
+}
+
+.input--edit-message {
+  background: transparent;
+  color: $white;
+  border: none;
+}
+
+input::placeholder {
+  color: $muted;
+}

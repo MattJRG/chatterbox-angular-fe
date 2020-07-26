@@ -1,9 +1,7 @@
 <div class="page-container">
 
   <div *ngIf="userService.isLoggedIn()">
-    <app-chat-box
-      [conversationTitle]="'Trollbox'"
-      conversationId='trollbox'>
+    <app-chat-box>
     </app-chat-box>
   </div>
 

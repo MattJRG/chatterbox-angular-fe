@@ -6,8 +6,37 @@
   box-sizing: border-box;
 }
 
+html,
 body {
+  height: 100%;
+  margin: 0;
   background: $off-white;
+  overflow: hidden;
+}
+
+.box {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.box .row {
+  // border: 1px dotted grey;
+}
+
+.box .row.header {
+  flex: 0 1 auto;
+}
+
+.box .row.content {
+  display: flex;
+  flex-flow: column;
+  flex: 1 1 auto;
+  overflow-y: hidden;
+}
+
+.box .row.footer {
+  flex: 0 1 40px;
 }
 
 .troll-logo {
@@ -62,6 +91,19 @@ body {
   }
 }
 
+.hide-at-lt-screen-lg {
+  @media (max-width: $screen-lg) {
+    display: none;
+  }
+}
+
+.show-at-lt-screen-lg {
+  display: none;
+  @media (max-width: $screen-lg) {
+    display: unset;
+  }
+}
+
 .container-1920 {
   display: flex;
   justify-content: space-between;
@@ -69,4 +111,10 @@ body {
   max-width: 1920px;
   width: 100%;
   align-items: center;
+}
+
+app-chat-page {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
 }

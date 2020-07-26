@@ -1,60 +1,25 @@
 @import '../../../sass/base/variables';
 
-.trollbox-container {
-  margin: 0 auto;
-  max-width: 600px;
+.chat-box-container {
+  display: flex;
+  flex: 1 1 auto;
+  flex-flow: column;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+.chat-box__spinner-container {
+  height: 70vh;
+  max-width: 1000px;
+  min-width: 280px;
   background: $dark;
-  padding: 1.5rem;
   overflow-y: scroll;
   height: 70vh;
 }
 
-.bubble-container {
-  display: flex;
-  flex-flow: column wrap;
-}
+.chat-content-container {
 
-.post-bubble {
-  border-radius: 1em;
-  padding: 0.25em 0.75em;
-  margin: 0.0625em;
-  max-width: 50%;
-}
-
-.sender {
-  align-self: flex-start;
-  background-color: $olive;
-  color: $white;
-
-  &.first { border-bottom-left-radius: 0.1em; }
-  &.last { border-top-left-radius: 0.1em; }
-  &.middle {
-    border-bottom-left-radius: 0.1em;
-     border-top-left-radius: 0.1em;
-  }
-}
-
-.sender-title {
-  align-self: flex-start;
-  color: $olive;
-}
-
-.recipient-title {
-  align-self: flex-end;
-  color: $blue;
-}
-
-.recipient {
-  align-self: flex-end;
-  background-color: $blue;
-  color: #fff;
-
-  &.first { border-bottom-right-radius: 0.1em; }
-  &.last { border-top-right-radius: 0.1em; }
-  &.middle {
-    border-bottom-right-radius: 0.1em;
-    border-top-right-radius: 0.1em;
-  }
 }
 
 .form-control:focus {
@@ -64,7 +29,9 @@
 }
 
 .troll-form {
-  max-width: 600px;
+  // max-width: 900px;
+  width: 100%;
+  min-width: 280px;
   margin: 15px auto;
   display: flex;
   justify-content: space-between;
@@ -105,16 +72,6 @@ p {
   height: 32px;
 }
 
-.btn-post {
+.btn-message {
   padding: .75rem;
-}
-
-.input--edit-post {
-  background: transparent;
-  color: $white;
-  border: none;
-}
-
-input::placeholder {
-  color: $muted;
 }

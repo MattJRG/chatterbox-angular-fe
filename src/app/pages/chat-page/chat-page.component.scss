@@ -2,5 +2,50 @@
 
 .page-container {
   display: flex;
-  justify-content: space-between;
+  flex: 1 1 auto;
+  justify-content: center;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+
+  @media (max-width: 1450px) {
+    margin: auto 1rem;
+  }
+}
+
+.container-spinner-active {
+  display: flex;
+  align-items: center;
+}
+
+.spinner-container-div {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.sidebar-tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 50%;
+  height: 30px;
+  background: $muted;
+  color: $white;
+
+  &.sidebar-tab--active {
+    background: $dark;
+  }
+}
+
+.sidebar--left {
+  @media (max-width: $screen-lg) {
+    margin-top: calc(4rem - 30px);
+  }
+}
+
+.sidebar {
+  margin-top: 4rem;
 }
