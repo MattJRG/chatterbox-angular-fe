@@ -32,7 +32,7 @@ body {
   display: flex;
   flex-flow: column;
   flex: 1 1 auto;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 .box .row.footer {

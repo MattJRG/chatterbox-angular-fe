@@ -10,7 +10,7 @@
       (mouseenter)="friend.hover=true"
       (mouseleave)="friend.hover=false">
         <p class="friend text--no-margin">{{ friend.username }}</p>
-        <a *ngIf="friend.hover" routerLink="/chat/{{friend.userId}}">Chat</a>
+        <a *ngIf="friend.hover" class="chat-link" (click)="switchConversation(friend.userId)">Chat</a>
       </div>
     </div>
     <br>
@@ -39,7 +39,7 @@
       (mouseenter)="friend.hover=true"
       (mouseleave)="friend.hover=false">
         <p class="friend text--no-margin">{{ friend.username }}</p>
-        <a class="chat-link" *ngIf="friend.hover" (click)="switchConversation(friend.userId)">Chat</a>
+        <a *ngIf="friend.hover" class="chat-link" (click)="switchConversation(friend.userId)">Chat</a>
       </div>
     </div>
     <br>
