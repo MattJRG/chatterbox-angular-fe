@@ -62,9 +62,6 @@ export class ConnectorService {
   }
 
   // Users
-
-  // Should return an array of friends and other online users
-  // Will have a friend request property
   getUsers = (): Observable<any> => {
     return this.apiService.get(`${this.API_URL}/api/get_users`);
   }
@@ -82,7 +79,7 @@ export class ConnectorService {
   }
 
 
-  // Trolls
+  // Trolls -- NO LONGER USED - TROLLS NOW A CONVERSATION
   getTrollPosts = (query): Observable<any> => {
     return this.apiService.get(`${this.API_URL}/trolls?${query}`);
   }
@@ -99,6 +96,10 @@ export class ConnectorService {
 
   getAllConversations = (): Observable<any> => {
     return this.apiService.get(`${this.API_URL}/conversation/user`)
+  }
+
+  updateConversationTitle = (newTitleData): Observable<any> => {
+    return this.apiService.post(`${this.API_URL}/conversation`, newTitleData)
   }
 
   // Messages

@@ -1,5 +1,6 @@
 <div *ngIf="!loadingConversations" class="conversation-container">
   <h4 *ngIf="screenLarge">Chats</h4>
+  <hr>
   <div *ngIf="conversations.length > 0">
     <div *ngFor="let conversation of conversations">
       <div class="conversation-row">

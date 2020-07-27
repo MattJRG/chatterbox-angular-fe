@@ -1,6 +1,8 @@
 <div class="chat-box-container" *ngIf="userService.isLoggedIn() && !conversationClearing">
   <br>
-  <h3 class="troll-feed">{{ conversationTitle }}</h3>
+  <h3 *ngIf="!titleEdit" class="troll-feed">{{ conversationTitle }}</h3>
+  <!-- <h3 *ngIf="!titleEdit" class="troll-feed" (click)="titleEdit = true">{{ conversationTitle }}</h3>
+  <input *ngIf="titleEdit" class="input--edit-title" value="{{conversationTitle}}"> -->
   <div class="chat-content-container">
     <div *ngIf="loading" class="chat-box__spinner-container">
       <app-spinner [white]="true"></app-spinner>

@@ -21,6 +21,7 @@ showEmojiMart: boolean = false;
 conversationClearing = false;
 conversationTitle: string;
 conversationId: string;
+titleEdit: boolean = false;
 
 @Input() loading: boolean;
 

@@ -1,5 +1,12 @@
 @import '../../../sass/base/variables';
 
+.input--edit-title {
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  height: 41;
+}
+
 .chat-box-container {
   display: flex;
   flex: 1 1 auto;
@@ -16,10 +23,6 @@
   background: $dark;
   overflow-y: scroll;
   height: 70vh;
-}
-
-.chat-content-container {
-
 }
 
 .form-control:focus {
